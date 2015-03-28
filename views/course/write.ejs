@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/mystyle.css">
+    <script src="/javascripts/jquery.tmpl.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/myscript.js"></script>
+    <script src="/javascripts/jquery.slides.min.js"></script>
+    <script type="text/javascript" language="javascript">
+    </script>
+</head>
+<body>
+
+<div id="course_write" data-role="page" data-title='board_read'>
+    <header data-role='header' data-theme='c'>
+        <a href='/board/main/1' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" id = "logo_header" alt='logo'/></h1>
+        <a href='#' data-icon='edit' data-iconpos='notext' onclick="course_writeProc()" ></a>
+    </header>
+    <section data-role="content">
+        <form action="/course/write" method="post" id="writefrm" data-ajax="false" enctype="multipart/form-data">
+            <div id="write_content" style="height: auto; margin-bottom: 20px;">
+                <div id="write_title" style="height: 50px; border-bottom: 1px solid #EEEEEE; border-radius: 5px;">
+                    <div class="ui-grid-a" style="background-color: #E6E6E6;">
+                        <div class="ui-block-a" style="width:20%; text-align: center;vertical-align: middle; border-right: 1px solid #EEEEEE; color : #999999;">
+                            <div class="write_element">
+                                제목
+                            </div>
+                        </div>
+                        <div class="ui-block-b" style="width:80%; vertical-align: middle;">
+                            <div class="write_element">
+                                <input type="text" name="title" id="title" style="border: 0px; background-color: #E6E6E6">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <div id="write_title" style="height: 50px; border-bottom: 1px solid #EEEEEE; border-radius: 5px;">
+                    <div class="ui-grid-a" style="background-color: #E6E6E6;">
+                        <div class="ui-block-a" style="width:20%; text-align: center;vertical-align: middle; border-right: 1px solid #EEEEEE; color : #999999;">
+                            <div class="write_element">
+                                한줄소개
+                            </div>
+                        </div>
+                        <div class="ui-block-b" style="width:80%; vertical-align: middle;">
+                            <div class="write_element">
+                                <textarea name="one_line" id="one_line" placeholder="한줄소개." maxlength="20" rows="20" style="border: 0px; background-color: #E6E6E6;"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+
+                <textarea name="content" id="content" placeholder="내용을 입력하세요." maxlength="1000" rows="20" style="height: 1000px;border: 0px; background-color: #E6E6E6;"></textarea>
+            </div>
+
+            <!--<div class="upload">-->
+            <input type="file" name="photo" id="photo_0" value="사진업로드" data-clear-btn="true"/>
+            <!--</div>-->
+        </form>
+    </section>
+</div>
+</body>
+</html>

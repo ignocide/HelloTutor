@@ -1,0 +1,142 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/mystyle.css">
+    <script src="/javascripts/jquery.tmpl.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/myscript.js"></script>
+    <script src="/javascripts/jquery.slides.min.js"></script>
+    <script type="text/javascript" language="javascript">
+
+    </script>
+</head>
+<body>
+
+<div id="course_info" data-role="page" data-title='course_info'>
+    <div data-role="panel" id="sidebar" data-display="overlay">
+        <div id = "to_home_outer">
+            <div class="ui-grid-a" onclick="location.href='/board/main/1'">
+                <div class="ui-block-a" style="width:20%; float:left;">
+                    <a><img src="/images/menu_home.png" id = "to_home_icon" alt='icon'/></a>
+                </div>
+                <div id="to_home" class="ui-block-b" style="width:80%; float:left;"><p>홈으로 이동</p></div>
+            </div>
+        </div>
+        <div id="my_profile" onclick="profile('<%=profile.email%>',<%=profile.isTutor%>)">
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="width:40%; vertical-align: middle">
+                    <%if(profile.thumbnail == null){%><img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 100px;" alt='icon'/><%}%>
+                    <%if(profile.thumbnail != null){%><img src="<%=profile.thumbnail%>" id = "profile_thumbnail" style="height: 100px;" alt='icon'/><%}%>
+                </div>
+                <div class="ui-block-b" style="width:60%; vertical-align: middle">
+                    <p><a id="name"><%= profile.name %></a><a id="address"><%= profile.address_gu %></a><br/>
+                        <% if(profile.isTutor == 1){
+                                (profile.subjects).forEach(function(subject){%>
+                        <a class="subjects"><%= subject %></a>
+                        <%if((profile.subjects).indexOf(subject) == 1){%><br/><%}%>
+                        <%})} else { if(profile.school_name != undefined){%><a id="school"><%= profile.school_name %></a>&nbsp<a id="grade"><%= profile.grade %></a> <%}}%>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="menu_list">
+            <ul data-role="listview">
+                <li><a onclick="location.href='/member/recommend_tutor/1'"><img src="/images/menu_a.png">지인을 찾아보세요</a></li>
+                <li><a onclick="location.href='/community/friend_list'"><img src="/images/menu_b.png">내 인맥</a></li>
+                <li><a onclick="location.href='/message/alarm'"><img src="/images/menu_c.png">알림</a></li>
+                <li><a onclick="location.href='/message/list'"><img src="/images/menu_c.png">메세지</a></li>
+                <li><a onclick="location.href='/search'"><img src="/images/menu_c.png">검색</a></li>
+                <li><a onclick="location.href='/message/notice'"><img src="/images/menu_d.png">공지사항</a></li>
+                <!--<li><a href="bmw.html"><img src="/images/menu_e.png">설정</a></li>-->
+            </ul>
+        </div>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <a href='#sidebar' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" id = "logo_header" alt='logo'/></h1>
+    </header>
+    <section data-role="content">
+        <div id="info_header">
+            <a id="writer" href="/users/tutor_simple/<%=course.email%>" style="float:left;"><%=course.name%></a> <a id="regdate" style="float:right"><%=course.regdate%></a>
+        </div>
+        <br/>
+        <div id="course_content">
+            <div id="course_img">
+                <%if(course.photo != null){%>
+                <img src="<%=course.photo%>">
+                <%}%>
+                <!--<img src="/images/class_default.png">-->
+            </div>
+            <div id="title">
+                <a><%=course.title%></a>
+            </div>
+            <div id="subjects">
+                <ul id="course_subjects">
+                <%(course.subjects).forEach(function(subject){%>
+                <li><a id="subject"><%=subject%></a></li>
+                <%})%>
+                </ul>
+            </div>
+            <div id="one_line">
+                <h4><%=course.one_line%></h4>
+            </div>
+            <div id="content">
+                <p><%=course.content%></p>
+            </div>
+        </div>
+        <div class="course_footer_1">
+                <div class="write_reivew" onclick="show_review_form()">
+                    <a>후기 쓰기</a>
+                </div>
+        </div>
+        <form action="/course/review_write" method="post" data-ajax="false">
+            <input type="hidden" name ="grp" value="<%=course.num%>">
+            <div id="review_form" style="display: none;" >
+                <div class="ui-grid-b">
+                    <div class="ui-block-a" style="width:70%;">
+                        <textarea name = "content" id="content"></textarea>
+                    </div>
+                    <div class="ui-block-b" style="width:30%; padding :10px">
+                        <!--<img src='/images/comment.png' style="max-width: 100%;">-->
+                        <input type="submit" value="쓰기">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <div class="course_reviews">
+            <h4>수업후기</h4>
+            <%(review).forEach(function(item){%>
+            <div class = "review">
+                <div id="review_header">
+                    <a id="regdate" style="float:right"><%=item.regdate%></a>
+                </div>
+                <div id="review_content">
+                    <p><%=item.content%></p>
+                </div>
+                <div id="review_footer">
+                    <a id="review_good_<%=review.indexOf(item)%>" style="float:right">좋아요 <%=item.good%>개</a>
+                </div>
+
+                <%if(item.isGood == 0){%>
+                <div id="review_good_btn_<%=review.indexOf(item)%>" style="text-align: center" onclick="review_good_req(<%=item.num%>,<%=item.good-item.isGood%>,<%=review.indexOf(item)%>)">
+                    좋아요
+                </div>
+                <%}%>
+                <%if(item.isGood == 1){%>
+                <div id="review_good_btn_<%=review.indexOf(item)%>" style="text-align: center" onclick="review_good_del(<%=item.num%>,<%=item.good-item.isGood%>,<%=review.indexOf(item)%>)">
+                   좋아요 취소
+                </div>
+                <%}%>
+            </div>
+            <%})%>
+        </div>
+    </section>
+</div>
+</body>
+</html>

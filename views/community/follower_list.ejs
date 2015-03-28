@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <link rel="stylesheet" href="/stylesheets/mystyle.css">
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="/javascripts/jquery.tmpl.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/myscript.js"></script>
+    <script>
+    </script>
+</head>
+<body>
+
+<div id="follower_list" data-role="page" data-title='recommend_tutor'>
+
+    <div data-role="panel" id="sidebar" data-display="overlay">
+        <div id = "to_home_outer">
+            <div class="ui-grid-a" onclick="location.href='/board/main/1'">
+                <div class="ui-block-a" style="width:20%; float:left;">
+                    <a><img src="/images/menu_home.png" id = "to_home_icon" alt='icon'/></a>
+                </div>
+                <div id="to_home" class="ui-block-b" style="width:80%; float:left;"><p>홈으로 이동</p></div>
+            </div>
+        </div>
+        <div id="my_profile" onclick="profile('<%=profile.email%>',<%=profile.isTutor%>)">
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="width:40%; vertical-align: middle">
+                    <%if(profile.thumbnail == null){%><img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 100px;" alt='icon'/><%}%>
+                    <%if(profile.thumbnail != null){%><img src="<%=profile.thumbnail%>" id = "profile_thumbnail" style="height: 100px;" alt='icon'/><%}%>
+                </div>
+                <div class="ui-block-b" style="width:60%; vertical-align: middle">
+                    <p><a id="name"><%= profile.name %></a><a id="address"><%= profile.address_gu %></a><br/>
+                        <% if(profile.isTutor == 1){
+                                (profile.subjects).forEach(function(subject){%>
+                        <a class="subjects"><%= subject %></a>
+                        <%if((profile.subjects).indexOf(subject) == 1){%><br/><%}%>
+                        <%})} else { if(profile.school_name != undefined){%><a id="school"><%= profile.school_name %></a>&nbsp<a id="grade"><%= profile.grade %></a> <%}}%>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div id="menu_list">
+            <ul data-role="listview">
+                <li><a onclick="location.href='/member/recommend_tutor/1'"><img src="/images/menu_a.png">지인을 찾아보세요</a></li>
+                <li><a onclick="location.href='/community/friend_list'"><img src="/images/menu_b.png">내 인맥</a></li>
+                <li><a onclick="location.href='/message/alarm'"><img src="/images/menu_c.png">알림</a></li>
+                <li><a onclick="location.href='/message/list'"><img src="/images/menu_c.png">메세지</a></li>
+                <li><a onclick="location.href='/search'"><img src="/images/menu_c.png">검색</a></li>
+                <li><a onclick="location.href='/message/notice'"><img src="/images/menu_d.png">공지사항</a></li>
+                <!--<li><a href="bmw.html"><img src="/images/menu_e.png">설정</a></li>-->
+            </ul>
+        </div>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" id = "logo_header" alt='logo'/></h1>
+        <a onclick="location.replace('/board/main/1');" data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+
+            <li><a href="/community/friend_list" data-ajax="false">친구</a></li>
+            <li><a href="/community/follower_list" data-ajax="false" class="ui-btn-active">팔로워</a></li>
+        </ul>
+    </div>
+    <section data-role='content'>
+
+        <ul data-role="listview">
+            <div style="margin : 10px;">
+                <a>팔로워</a>
+            </div>
+            <%list.forEach(function(item){%>
+            <li>
+                <div class="friend_list">
+                    <div class="ui-grid-a" id="recommend_profile">
+                        <div id="friend_req_<%=list.indexOf(item)%>">
+                            <div class="ui-block-a" style="width:30%;" onclick="">
+                                <a>
+                                    <%if(item.thumbnail == null){%><img src="/images/mini_normal.jpg" id = "friend_thumbnail" alt='icon'/><%}%>
+                                    <%if(item.thumbnail != null){%><img src="<%=item.thumbnail%>" id = "friend_thumbnail" alt='icon'/><%}%>
+                                </a>
+                            </div>
+                            <div class="ui-block-b" style="width:70%;" onclick="">
+                                <div class="recommend_info">
+                                    <a class="friend_name"><%= item.name%></a><br/>
+                                    <a class="friend_isTutor"><% if(item.isTutor==1){%>선생님<%}%><% if(item.isTutor!=1){%>일반<%}%>
+                                        <% if(item.together!=null){%>&nbsp&nbsp&nbsp함꺠아는 친구 <%=item.together%>명<%}%>
+                                    </a>
+                                    <br/>
+                                    <a class="address"><%=item.address%></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <%})%>
+        </ul>
+    </section>
+</div>
+
+</body>
+</html>

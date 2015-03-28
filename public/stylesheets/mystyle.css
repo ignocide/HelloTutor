@@ -1,0 +1,1230 @@
+#home{
+	text-align: center;
+	background: url('../images/background.jpg');
+}
+
+section{
+	background-color: #EFEFEF;
+}
+
+div{
+	word-break:break-all;
+	text-overflow:ellipsis;
+	overflow:hidden;
+	/*white-space:nowrap;*/
+}
+/*a{color : #000000 !important;};*/
+
+/*
+a:link
+ {text-decoration:none; color:#FFFFFF;} 
+a:visited 
+{text-decoration:none; color:#FFFFFF;} 
+a:active 
+{text-decoration:none; color:#FFFFFF;} 
+a:hover 
+{text-decoration:none; color:#FFFFFF;} 
+*/
+/*#home .ui-controlgroup{
+	width: 60%;
+	margin : 0 auto;
+	margin-top : 20px;
+	max-width: 250px;
+}*/
+
+#home #icon{
+	width: 35%;
+	max-width: 250px;
+}
+
+#home #logo{
+	width: 80%;
+	max-width: 350px;
+}
+
+#home a{
+	width : 70% !important;
+	color : white;
+	margin: 0 auto;
+}
+
+#home #email_join{
+	background: #2ECCFA;
+}
+
+#home #facebook_join{
+	background: #084B8A;
+}
+
+#home #login_btn{
+	color : #58FAF4;
+}
+
+
+#logo_header{
+	height: 20%;
+	max-height: 20px;
+	height: auto;
+}
+
+#login section{
+	margin: 30px;
+}
+
+#login #find_pw_btn{
+	width: 40%;
+	font-size : 0.8em;
+	background: #6699FF;
+	color : white;
+	float: right;
+}
+
+#login #login_submit{
+	background: #6699FF;
+	color : white;
+}
+
+#login #login_cancel{
+	background: #D4D4D4;
+	color : #8A8A8A;
+}
+
+#join_choose section{
+	margin : 20px;
+	text-align: center;
+}
+#join_choose #choose_icon{
+	width: 30%;
+	max-width: 200px;
+	height: auto;
+}
+
+
+#join_common section{
+	margin : 20px;
+}
+
+#join_common #join_submit{
+	background: #6699FF;
+	color : white;
+}
+
+#join_common #join_cancel{
+	background: #D4D4D4;
+	color : #8A8A8A;
+}
+
+#join_choose section{
+	margin-top: 150px;
+}
+
+#join_tutor #upper{
+	background: #71A0FF;
+	color : white;
+	height: 30px;
+	text-align: center;
+	font-size: 1.2em;
+	vertical-align: middle;
+}
+
+#join_tutor section{
+	margin : 30px;
+	padding : 5px;
+}
+
+.guide{
+	font-size: 0.8em;
+	color : #999999;
+}
+
+#join_user #upper{
+	background: #71A0FF;
+	color : white;
+	height: 30px;
+	text-align: center;
+	font-size: 1.2em;
+	vertical-align: middle;
+}
+#join_user section{
+	margin : 30px;
+	padding : 5px;
+}
+
+#find_pw section{
+	margin : 30px;
+	padding-top: 50px;
+}
+
+
+
+
+
+#sidebar div{
+	padding : 0px;
+	margin : 0px;
+}
+
+#sidebar #to_home_outer{
+	padding : 0px;
+	height: 50px;
+	background : #8C8C8C;
+}
+
+#sidebar #to_home{
+	height: 50px;
+	vertical-align: middle;
+	color : white;
+}
+
+#sidebar #to_home_icon{
+	height: 50px;
+}
+
+#sidebar #my_profile{
+	height: 120px;
+	background : #6D6D6D;
+	vertical-align: middle;
+	text-align: center;
+}
+
+#sidebar #my_profile #profile_thumbnail{
+	height: 100px;
+	margin: 10px;
+}
+#my_profile div{
+	/*height: 100%;*/
+	letter-spacing: 5px;
+	vertical-align: middle;
+	text-align: center;
+	line-height: 30px;
+}
+
+#my_profile img{
+	height: 100%;
+	/*width: 80px;*/
+}
+
+#my_profile #profile_info{
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	height: 120px;
+	width: 200px;
+	max-width: 100%;
+	margin : 0px auto;
+}
+
+#my_profile .subjects{
+	background : #003366;
+	color : white;
+	/*border: 1px solid black;*/
+	font-size: 0.5em;
+	text-align: center;
+	padding : 5px;
+	margin: 10px;
+	/*display: table-cell;*/
+	/*vertical-align: middle;*/
+	width: 30px;
+
+}
+
+#my_profile #name{
+	font-size: 1.3em;
+	color : white;
+}
+
+
+#my_profile #address{
+	font-size: 0.9em;
+	color :  #ccffff;
+}
+
+#menu_list li{
+	/*height: 50px;*/
+	vertical-align: middle;
+	font-size: 0.9em;
+	padding : 0px;
+}
+#menu_list li a{
+	height: 50px;
+	font-size: 0.9em;
+}
+
+
+/*메인 부분          인듯?*/
+
+.recommend{
+	border-radius: 5px;
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	text-align: center;
+}
+
+.recommend_list{
+	height: 70px;
+	/*border-top:1px solid #cccccc;*/
+	/*border-bottom:1px solid #cccccc;*/
+	text-align: center;
+}
+
+
+/*.recommend #recommend_header{
+	background-color: #eeeeee;
+	height: 15px;
+	padding-left: 10px;
+	vertical-align: middle;
+	color : #333333;
+	font-size: 15px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	text-align: left;
+}*/
+
+.recommend #recommend_footer{
+	border-top: 1px solid #cccccc;
+	background-color: #ffffff;
+	height: 15px;
+	padding: 5px 10px 5px 10px;
+	vertical-align: middle;
+	color : #555555;
+	font-size: 12px;
+	text-align: left;
+}
+
+.recommend_info{
+	display: table-cell; 
+	vertical-align: middle;
+	height: 70px;
+	text-align: left;
+}
+
+#recommend_thumbnail{
+	height: 60px;
+	margin: 5px;
+}
+
+.recommend_name{
+	text-decoration: none;
+	color : #000000 !important;
+	font-size : 1em;
+}
+.recommend_together,.recommend_school,.recommend_address{
+	text-decoration: none;
+	color : #555555 !important;
+	font-size : 0.7em;
+}
+
+.state_list{
+	background-color: #ffffff;
+	height : 60px;
+	box-shadow: 5px 5px 10px #cccccc;
+	border-radius: 3px;
+	padding : 5px;
+}
+
+.state_list img{
+	max-width: 50%;
+	height: 60px;
+}
+
+.state_list #state_notice{
+	display: table-cell;
+	vertical-align: middle;
+	font-size: 0.8em;
+	padding: 10px;
+	height: 40px;
+}
+.state_list #state_name{
+	font-size: 1em !important;
+}
+
+
+#main .course_list{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	padding : 10px;
+	font-size: 0.9em;
+	color : #555555;
+}
+
+#main .course_list .board_header{
+	border-bottom: 1px solid #eeeeee;
+}
+
+#main .course_list #board_name{
+	color : #000000 !important;
+	font-size: 1em;
+
+}
+
+
+#main .course_list img{
+	height: 30px;
+}
+
+#main .board_content{
+	height: 110px;/*
+	padding-top:  5px;
+	padding-bottom:  5px;*/
+	text-align: center;
+}
+
+#main .board_content img{
+	height: 100px;
+}
+
+.board_content #board_content_inner{
+	height: 110px;
+	text-align: left;
+	display: table-cell;
+	vertical-align: middle;
+	padding: 5px;
+}
+
+#board_content_inner #course_title{
+	font-size: 1.2em;
+	color: #000000 !important;
+}
+
+
+#main .board_list{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	padding : 10px;
+	font-size: 0.9em;
+	color : #555555;
+}
+
+#main .board_list .board_header{
+	border-bottom: 1px solid #eeeeee;
+}
+
+#main .course_list #board_name{
+	color : #000000 !important;
+	font-size: 1em;
+
+}
+
+#main .board_content{
+	padding : 5px;
+	height: 110px;
+	text-align: center;
+}
+
+#main .board_content img{
+	height: 110px;
+}
+
+#main .board_footer_1{
+	width: 100000px;
+	max-width: 100%;
+	height: 30px;
+	display: table-cell;
+	vertical-align: middle;
+	border-bottom: 1px solid #eeeeee;
+	border-top: 1px solid #eeeeee;
+	text-align: center;
+}
+
+
+#main .board_footer_2{
+	width: 100000px;
+	max-width: 100%;
+	height: 30px;
+	/*display: table-cell;*/
+	vertical-align: middle;
+}
+#main .board_footer_2 img{
+	height: 30px;
+}
+
+
+
+
+
+
+
+
+
+.simple_profile{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+}
+
+.simple_profile #profile_thumbnail{
+	max-width:120px;
+	max-height: 120px;
+}
+
+.simple_profile .profile_info{
+	display: table-cell;
+	vertical-align: middle;
+	height: 100px;
+	padding: 10px;
+}
+
+.simple_profile #profile_name{
+	color : #000000;
+	letter-spacing: 5px;
+}
+
+.simple_profile #profile_address{
+	color : #555555;
+	letter-spacing: 2px;
+}
+
+.simple_profile #message_btn{
+	height: 120px;
+	display: table-cell;
+	vertical-align: middle;
+}
+
+.simple_profile #profile_message_btn{
+	max-width: 100%;
+}
+
+.simple_profile #profile_message_btn img{
+	max-width: 100%;
+}
+
+.simple_profile_footer{
+	/*border: 1px solid #cccccc;*/
+/*	height: 30px;*/
+}
+
+.simple_profile_footer input{
+background-color: #6699FF !important; 
+color: #FFFFFF !important;
+}
+/*
+.simple_profile_footer img{
+	height: 100%;
+	max-height: 30px;
+}
+*/
+
+#tutor_simple .relation_list img{
+	width: 25%;
+}
+
+.course{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+}
+
+.course .course_content{
+	padding : 5px;
+	height: 110px;
+	text-align: center;
+}
+
+.course .course_content img{
+	height: 110px;
+}
+
+#course_content_inner{
+		height: 110px;/*
+	padding-top:  5px;
+	padding-bottom:  5px;*/
+	text-align: left;
+	display: table-cell;
+	vertical-align: middle;
+	padding: 5px;
+}
+
+#course_content_inner #course_title{
+	font-size: 1.2em;
+	color: #000000 !important;
+}
+
+.course #course_footer{
+	border-top: 1px solid #cccccc;
+	padding : 5px;
+	text-align: center;
+}
+
+
+
+
+
+.board{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	padding :5px;
+}
+
+.board .board_header{
+	height: 30px;
+	border-bottom: 1px solid #eeeeee;
+	color : #000000 !important;
+}
+
+.board .board_content{
+	padding : 5px;
+	height: 110px;
+}
+.board .board_footer_1{
+	width: 100000px;
+	max-width: 100%;
+	height: 30px;
+	display: table-cell;
+	vertical-align: middle;
+	border-bottom: 1px solid #eeeeee;
+	border-top: 1px solid #eeeeee;
+	text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*tutor_detail page*/
+.career{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	padding : 10px;
+	border-radius: 5px;
+}
+
+.career #career_header{
+	border-bottom: 1px solid #cccccc;
+}
+.career #career_title{
+	color : #000000 !important;
+	font-size: 1.0em;
+	letter-spacing: 3px;
+}
+
+.career #career_date{
+	color : #555555 !important;
+	font-size: 0.7em;
+}
+
+.career #career_content p{
+	font-size: 0.8em;
+}
+
+#academic{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	padding : 10px;
+	font-size: 0.9em;
+	color : #555555;
+}
+
+
+#etc{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	padding : 10px;
+	font-size: 0.9em;
+	color : #555555;
+}
+
+#about_me{
+	/*box-shadow: 5px 5px 10px #cccccc;*/
+	/*background-color: #ffffff;*/
+	padding : 10px;
+	font-size: 0.9em;
+	color : #555555;
+}
+
+#url_content{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	padding : 10px;
+	font-size: 0.9em;
+	color : #555555;
+}
+
+
+
+
+
+
+
+
+
+
+
+/*board read 부분*/
+
+.board_outer{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #ffffff;
+	border: 1px solid #cccccc;
+}
+#board_read #read_header{
+	padding-left :5px;
+	padding-right : 5px;
+	height: 30px;
+	display: table-cell;
+	vertical-align: middle;
+	border-bottom: 1px solid #CCCCCC; 
+	width: 1000000px;
+	max-width: 100%;
+}
+
+#board_read #read_header #writer{
+	color : #000000 !important;
+	font-size: 0.9em;
+	letter-spacing: 3px;
+	float: left;
+}
+
+#board_read #read_header #regdate{
+	color : #555555 !important;
+	font-size: 0.9em;
+	float: right;
+	/*letter-spacing: 2px;*/
+}
+.slidesjs-container{
+	max-height: 300px;
+	max-width: auto;
+}
+#slides a{
+	display: none;
+}
+
+#slides ul{
+	display: none;
+}
+
+#board_read #board_content{
+	padding-bottom: 10px;
+}
+
+#board_content #title{
+	padding : 10px;
+	/*background-color: #FFFFFF;*/
+	/*box-shadow: 5px 5px 10px #cccccc;*/
+	/*border-bottom: 1px solid #CCCCCC; */
+}
+
+#board_content #title a{
+	color : #000000;
+	font-size: 1.2em;
+}
+
+#board_content #content{
+	padding : 10px;
+	font-size: 0.9em;
+	color : #666666;
+	line-height: 1.5em;
+	border-bottom: 1px solid #CCCCCC; 
+}
+
+#board_content #content p{
+	margin : 0px;
+}
+
+.board_commends{
+	/*padding-left: 10px;*/
+}
+
+.board_commends h4{
+	padding-top: 0px;
+	margin-top: 0px;
+}
+
+#comment {
+/*	box-shadow: 1px 1px 5px #EEEEEE;*/
+border: 1px solid #eeeeee;
+}
+
+#comment #comment_header{
+	height: 20px;
+	border-bottom: 1px solid #EEEEEE;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-top: 5px;
+	padding-top: 5px;
+}
+#comment #comment_content{
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+#comment #comment_content p{
+	margin-bottom: 0px;
+}
+#comment #comment_header #writer{
+	color : #555555 !important;
+	font-size: 1em;
+	letter-spacing: 5px;
+}
+
+#comment #comment_header #regdate{
+	color : #AAAAAA !important;
+	font-size: 0.7em;
+}
+
+#comment #comment_header #comments{
+	color : #AAAAAA !important;
+	font-size: 0.7em;
+}
+
+#board_read .board_footer_1{
+	width: 100000px;
+	max-width: 100%;
+	height: 20px;
+	display: table-cell;
+	vertical-align: middle;
+	border-bottom: 1px solid #cccccc;
+	/*border-top: 1px solid #cccccc;*/
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+#board_read .board_footer_1 a{
+	font-size: 0.8em;
+}
+
+#cmt_form{
+	padding-left: 5px;
+	padding-right : 5px;
+}
+
+
+
+
+
+
+#course_info #info_header{
+	padding-left :5px;
+	padding-right : 5px;
+	height: 30px;
+/*	display: table;
+	vertical-align: middle;*/
+	border-bottom: 1px solid #CCCCCC; 
+
+}
+
+#course_info #info_header #writer{
+	color : #000000 !important;
+	font-size: 0.9em;
+	letter-spacing: 3px;
+}
+
+#course_info #info_header #regdate{
+	color : #555555 !important;
+	font-size: 0.9em;
+	/*letter-spacing: 2px;*/
+}
+
+#course_info #course_img{
+	max-height: 400px;
+	max-width: 100%;
+}
+
+#course_info #course_img img{
+	max-height: 400px;
+	max-width: 100%;
+}
+
+#course_info #course_content #title{
+	padding : 5px;
+	/*background-color: #FFFFFF;*/
+	/*box-shadow: 5px 5px 10px #cccccc;*/
+	border-bottom: 1px solid #CCCCCC; 
+}
+
+#course_info #course_content #title a{
+	color : #000000;
+	font-size: 1.2em;
+}
+
+#course_info #content{
+	font-size: 0.9em;
+	color : #333333;
+	line-height: 1.5em;
+	border-bottom: 1px solid #CCCCCC; 
+}
+
+#course_subjects {
+	padding-left: 0px;
+	height: 20px;
+}
+
+#course_subjects li {
+  list-style-type:none !important;
+  float:left;
+}
+
+#course_subjects #subject{
+	background : #003366 !important;
+	color : #ffffff !important;
+	/*border: 1px solid black;*/
+	font-size: 1em;
+	padding :5px 10px 5px 10px;
+	margin: 5px;
+}
+
+#one_line h5{
+	margin-top: 5px;
+	margin-bottom: 5px;
+	color:  #888888;
+}
+
+#course_info #content{
+	font-size: 0.9em;
+	color : #555555;
+}
+
+
+.course_footer_1{
+	width: 100000px;
+	max-width: 100%;
+	height: 30px;
+	display: table-cell;
+	vertical-align: middle;
+	border-bottom: 1px solid #eeeeee;
+	border-top: 1px solid #eeeeee;
+	text-align: right;
+}
+
+.review{
+	box-shadow: 5px 5px 10px #cccccc;
+	background-color: #FFFFFF;
+	padding : 5px;
+	margin-bottom: 7px;
+	height: auto;
+}
+
+.review #review_header{
+	padding: 3px;
+	height: 15px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.review #review_content{
+	padding: 5px;
+	height: auto;
+}
+
+.review #review_footer{
+	padding: 3px;
+	font-size: 0.6em;
+	height: 10px;
+	border-bottom: 1px solid #eeeeee;
+}
+
+.review #review_header #regdate{
+	color : #888888;
+	font-size: 0.8em;
+}
+
+.review #review_content p{
+	margin : 0px;
+	color : #555555;
+	font-size: 0.9em;
+}
+
+div.upload {
+    width: 100px;
+    max-width: 100%;
+    height: 100px;
+    overflow: hidden;
+    /*display: table-cell;*/
+    /*vertical-align: middle;*/}
+
+#join_user .upload div.ui-input-text{
+	    background: url(/images/mini_normal.jpg);
+}
+
+
+#join_tutor .upload div.ui-input-text{
+	    background: url(/images/mini_normal.jpg);
+}
+
+div.upload input {
+    display: block !important;
+    max-width: 100% !important;
+    /*width: 100px !important;*/
+    height: 100px !important;
+    max-height: 100%	;
+    opacity: 0 !important;
+    overflow: hidden !important;
+    background-color: #000000;
+}
+
+div.write_element{
+	height: 50px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	width: 1000px;
+	max-width: 100%;
+}
+
+#board_write .ui-input-text{
+	margin: 0px;
+
+}
+
+.friend_list .friend_name{
+	color:#000000;
+	font-size: 1em;
+}
+.friend_list .friend_isTutor{
+	/*color:#000000;*/
+	font-size: 0.8em;
+}
+.friend_list .address{
+	color:#666666;
+	font-size: 0.8em;
+}
+.friend_list .ui-btn{
+	font-size: 0.8em !important;
+	background-color: #3388CC;
+	color : #FFFFFF;
+}
+
+#friend_thumbnail{
+	height: 60px;
+	margin: 5px;
+	max-height: 100%;
+	max-width: 100%;
+}
+
+
+#message_list .message{
+	background-color: #FFFFFF;
+	border: 1px solid #eeeeee;
+	box-shadow: 5px 5px 10px #cccccc;
+	padding : 5px;
+	margin-bottom: 10px;
+}
+
+.meesage #message_header{
+	height: 50px;
+	/*border-bottom: 1px solid #000000;*/
+}
+
+#message_header #from_name{
+	color : #000000 !important;
+	font-size: 1.1em;
+}
+#message_header #senddate{
+	color : #888888 !important;
+	font-size: 0.8em;
+}
+.message #message_header div{
+	height: 50px; 
+}
+
+.message #message_content{
+	padding :10px ;
+	font-size: 0.9em ;
+	color:#555555 ;
+}
+
+.message #message_footer{
+	text-align: center;	
+}
+
+#message_footer div{
+		padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+
+
+
+
+
+
+#notice_list .notice{
+	background-color: #FFFFFF;
+	border: 1px solid #eeeeee;
+	box-shadow: 5px 5px 10px #cccccc;
+	padding : 5px;
+	margin-bottom: 10px;
+}
+
+.notice #notice_header{
+	height: 50px;
+	/*border-bottom: 1px solid #000000;*/
+}
+
+#notice_header #hello_tutor{
+	color : #000000 !important;
+	font-size: 1.2em;
+}
+#notice_header #regdate{
+	color : #888888 !important;
+	font-size: 0.7em;
+}
+.notice #message_header div{
+	height: 50px; 
+}
+
+.notice #notice_content{
+	padding :10px;
+	font-size: 0.9em;
+	color:#555555;
+}
+
+
+
+
+
+
+
+
+#alram_list .alram{
+	background-color: #FFFFFF;
+	border: 1px solid #eeeeee;
+	box-shadow: 5px 5px 10px #cccccc;
+	padding : 5px;
+	margin-bottom: 10px;
+}
+
+
+#alram_list .alram{
+	background-color: #FFFFFF;
+	/*border-radius: 5px;*/
+	border: 1px solid #CCCCCC;
+	box-shadow: 5px 5px 10px #CCCCCC;
+	margin-bottom: 10px;
+}
+
+
+.alram #alram_header{
+	height: 50px;
+	/*border-bottom: 1px solid #000000;*/
+}
+
+#alram_header #from_name{
+	color : #000000 !important;
+	font-size: 1.1em;
+}
+#alram_header #regdate{
+	color : #888888 !important;
+	font-size: 0.8em;
+}
+.alram #alram_header div{
+	height: 50px; 
+}
+
+.alram #alram_content{
+	padding :10px;
+	font-size: 0.9em;
+	color:#555555;
+}
+
+.alram #alram_footer{
+	text-align: center;	
+}
+
+#alram_footer div{
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+
+
+
+
+#user_simple .relation_list img{
+	width: 16.6%;
+}
+
+#user_simple .relation_list{
+	width: 100%;
+}
+
+
+#user_simple #board_list{
+	padding : 5px;
+	background-color: #ffffff;
+	box-shadow: 5px 5px 10px #CCCCCC;
+}
+
+#user_simple #board_list .board_name{
+	color:#000000 !important;
+}
+
+#user_simple .board_content{
+	padding : 5px;
+	height: 110px;
+}
+
+
+#user_simple .board_content #board_title{
+	font-size: 1.2em;
+	color: #000000 !important;
+}
+
+#user_simple .board_footer_1{
+	text-align: center;
+}
+
+#user_simple .board_footer_1 a{
+	text-align: center;
+	color : #555555 !important;
+}
+
+
+
+
+
+
+
+#search_user #user_list li{
+	height: 80px;
+}
+
+
+#search_user #user_list li div{
+	height: 100px;
+}
+
+#search_user #user_list li img{
+	max-height: 90px;
+}
+
+#search_user .user_info{
+	height: 100px;
+
+}
+
+
+#search_tutor #tutor_list li{
+	height: 80px;
+}
+
+
+#search_tutor #tutor_list li div{
+	height: 100px;
+}
+
+#search_tutor #tutor_list li img{
+	max-height: 90px;
+}
+
+#search_tutor .user_info{
+	height: 100px;
+
+}

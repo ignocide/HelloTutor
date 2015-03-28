@@ -1,0 +1,1871 @@
+<!DOCTYPE HTML>
+<html ng-app="HelloTutor">
+<head>
+    <title>index</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" href="/stylesheets/css.css">
+    <script src="/javascripts/jquery.tmpl.min.js"></script>
+    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="/javascripts/angular.js"></script>
+    <script src="/javascripts/hello_controller.js"></script>
+    <script src="/javascripts/angular_directive.js"></script>
+    <script src="/javascripts/angular_functions.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/stylesheets/flexslider.css">
+
+    <script src="/javascripts/jquery.flexslider-min.js"></script>
+    <script src="/javascripts/angular-flexslider.js"></script>
+
+    <script type="text/javascript" language="javascript">
+
+    </script>
+</head>
+<body>
+
+<div id="home" data-role="page" data-title='Home'>
+    <section id="home_content" data-role="content" style="background-color: #FFFFFF;">
+        <img src="../images/icon.png" id = "icon" alt='icon'/><br/>
+        <img src="../images/main_hellotutor.png" id = "logo" alt='logo'/>
+        <a id="facebook_join" data-role="button">페이스북으로 가입하기</a><br/>
+        <a href="#join_common" id="email_join" data-role="button">이메일로 가입하기</a>
+        <!-- <input type="button" value="이메일로 가입하기" /> -->
+        <br/><br/>
+        <a style="font-size:1em; color : #999999;">이미 HelloTutor의 회원이신가요?</a>
+        <br/><br/>
+        <a href='#login' id="login_btn" data-role="button">로그인</a>
+    </section>
+
+</div>
+
+<div id='join_common' data-role='page' data-title="join_common" ng-controller="joinCtrl">
+
+    <div data-role="popup" id="warning" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>{{warning_msg}}</p>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="../images/hellotutor2.png" class="logo_header" alt='logo'/></h1>
+        <a href='#home' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <section data-role='content'>
+        <input type="hidden" name="email_ch" ng-value="email_ch">
+        <label for="basic">회원가입</label>
+        <input type="text" ng-model="user.firstname" placeholder="이름"/>
+        <input type="text" ng-model="user.lastname" placeholder="성"/>
+        <br/>
+        <input type="text" ng-model="user.email" ng-blur="email_check()" placeholder="이메일"/>
+        <!-- 이메일 중복체크 -->
+        <input type="password" ng-model="user.pw" placeholder="비밀번호(6자리이상)"/>
+        <input type="password" ng-model="pw_re" placeholder="비밀번호 확인"/>
+        <!-- //자동확인 -->
+        <a photofloat="left" style="font-size:0.8em; color : #999999;">위는 모두 필수항목입니다.</a>
+        <br/>
+        <button  id="join_submit" ng-click="join_common()"/>다 음</button>
+        <a href='/' id="join_cancel" data-role="button">취 소</a>
+
+        <div float="center">
+            <a style="font-size:0.8em; color : #999999;">회원가입시, 아래의 내용에 동의합니다.</a><br/>
+            <a href="#terms" data-rel="popup" style="font-size:0.9em; text-decoration: underline;">이용약관 & 개인정보보호정책</a>
+        </div>
+    </section>
+</div>
+
+<div id='join_choose' data-role='page' data-title="join_choose">
+    <header data-role='header' data-theme='c'>
+        <h1><img src="../images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#home' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <section data-role='content'>
+        <a style="color:#999999; font-size:1.2em;">계정 유형을 선택해 주세요</a><br/><br/>
+        <a href="#join_tutor"><img src="../images/tutor.png" id = "choose_icon" alt='tutor'/></a>
+        &nbsp;
+        <a href="#join_user"><img src="../images/user.png" id = "choose_icon" alt='user'/></a>
+    </section>
+</div>
+
+<div id='join_tutor' data-role='page' data-title="join_tutor" ng-controller="join_tutorCtrl">
+
+    <div data-role="popup" id="subject_list" data-theme="none">
+        <div data-role="collapsibleset" data-theme="b" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+            <div data-role="collapsible" data-inset="false" ng-repeat="class in classes">
+                <h2>{{class.cate}}</h2>
+                <ul ng-repeat="sub in class.subject" data-role="listview">
+                    <li><a ng-click="set_sub(sub)" data-rel="dialog">{{sub}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div data-role="popup" id="address_si_list" data-theme="b">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;" ng-repeat="address in address_si">
+            <li><a ng-click="setAddress_si(address)">{{address}}</a></li>
+        </ul>
+    </div>
+
+    <div data-role="popup" id="address_gu_list" data-theme="none">
+        <div data-role="collapsibleset" data-theme="b" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+            <div data-role="collapsible" data-inset="false" ng-repeat="address in address_gu">
+                <h2>{{address.cate}}</h2>
+                <ul ng-repeat="gu in address.gu" data-role="listview">
+                    <li><a ng-click="setAddress_gu(gu)" data-rel="dialog">{{gu}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="../images/hellotutor2.png" class="logo_header" alt='logo'/></h1>
+        <a href='#join_choose' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div id ="upper">선생님</div>
+    <section data-role='content'>
+        <!--<form action="/member/join_tutor" method="post" data-ajax="false" enctype="multipart/form-data">-->
+        <div class="ui-grid-a">
+            <div class="ui-block-a" style="width:40%; float:left;">
+                <div class="upload">
+                    <input type="file" file-model="photo"/>
+                </div>
+            </div>
+            <div class="ui-block-b" style="width:60%; float:right;">
+                <input type="text" ng-model="name" style="color:#999999; font-size:0.8em;" value="" readonly>
+                <input type="text" ng-model="tutor.email" style="color:#999999; font-size:0.8em;" value="" readonly>
+            </div>
+        </div>
+        <div class="guide">생년월일과 성별을 입력해주세요</div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a" style="width:60%; float:left;"><input type="date" ng-model="brithday" placeholder="생년월일"/></div>
+            <div class="ui-block-b" style="width:30%; float:right;">
+                <select ng-model="gender" name="gender" id="gender" style="width:100%;">
+                    <option value="남">남</option>
+                    <option value="여">여</option>
+                </select></div>
+        </div>
+        <br/>
+        <div class="guide">활동하고 계신 지역을 설정해주세요.</div>
+        <div class="ui-grid-a">
+            <div class="ui-block-a" style="width:45%;float:left;">
+                <a href="#address_si_list" data-rel="popup" data-position-to="window">
+                    <input type="text" ng-model="tutor.address_si" placeholder="시" readonly/>
+                </a>
+            </div>
+            <div class="ui-block-b" style="width:45%;float:right;">
+                <a href="#address_gu_list" data-rel="popup" data-position-to="window">
+                    <input type="text" ng-model="tutor.address_gu" placeholder="구" readonly/>
+                </a>
+            </div>
+        </div>
+        <br/>
+        <div class="guide">지도하실 과목을 입력해주세요 (최대 4개)</div>
+        <!--<a href="#subject_list" data-rel="popup" data-position-to="window">-->
+        <input type="text" ng-model="subjects[0]" data-clear-btn="true" placeholder="과목 검색" ng-click="subject_popup(0)" readonly/>
+        <input type="text" ng-model="subjects[1]" ng-show="subjects[0].length>0" data-clear-btn="true" placeholder="과목 검색" ng-click="subject_popup(1)" readonly/>
+        <input type="text" ng-model="subjects[2]" ng-show="subjects[1].length>0" data-clear-btn="true" placeholder="과목 검색" ng-click="subject_popup(2)" readonly/>
+        <input type="text" ng-model="subjects[3]" ng-show="subjects[2].length>0" data-clear-btn="true" placeholder="과목 검색" ng-click="subject_popup(3)" readonly/>
+        <!--<a href="#subject_list" data-rel="popup" data-transition="slideup" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-icon-gear ui-btn-icon-left ui-btn-a">Actions...</a>-->
+
+
+        <br/>
+        <button ng-click="join()">가입하기</button>
+        <!--<input type="button" value="가입 하기">-->
+        <!--</form>-->
+    </section>
+</div>
+
+<div id='join_user' data-role='page' data-title="join_user" ng-controller="join_userCtrl">
+
+
+    <div data-role="popup" id="address_si_list2" data-theme="b">
+        <ul data-role="listview" data-inset="true" style="min-width:210px;" ng-repeat="address in address_si">
+            <li><a ng-click="setAddress_si(address)">{{address}}</a></li>
+        </ul>
+    </div>
+
+    <div data-role="popup" id="address_gu_list2" data-theme="none">
+        <div data-role="collapsibleset" data-theme="b" data-content-theme="a" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+            <div data-role="collapsible" data-inset="false" ng-repeat="address in address_gu">
+                <h2>{{address.cate}}</h2>
+                <ul ng-repeat="gu in address.gu" data-role="listview">
+                    <li><a ng-click="setAddress_gu(gu)" data-rel="dialog">{{gu}}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="../images/hellotutor2.png" class="logo_header" alt='logo'/></h1>
+        <a href='#join_choose' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div id ="upper">일반</div>
+    <section data-role='content'>
+        <form action="/member/join_tutee" method="post" data-ajax="false" enctype="multipart/form-data">
+            <input type="hidden" name="last_name" id="last_name_user" value="">
+            <input type="hidden" name="first_name" id="first_name_user" value="">
+            <input type="hidden" name="pw" id="pw_user" value="">
+            <input type="hidden" name="email" id="email_user" value="">
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="width:40%; float:left;">
+                    <div class="upload" style="">
+                        <input type="file" file-model="photo" name="photo"/>
+                    </div>
+                </div>
+                <div class="ui-block-b" style="width:60%; float:right;">
+                    <input type="text" ng-model="name" name="tutee_name" id="tutee_name" style="color:#999999; font-size:0.8em;" value="" readonly>
+                    <input type="text" ng-model="user.email" name="user.email" id="tutee_email" style="color:#999999; font-size : 0.8em;" value="" readonly>
+                </div>
+            </div>
+            <div class="guide">생년월일과 성별을 입력해주세요</div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="width:60%; float:left;"><input type="date" ng-model="birthday" name="birthday" id="birthday" placeholder="생년월일"/></div>
+                <div class="ui-block-b" style="width:30%; float:right;">
+                    <select ng-model="gender" name="gender" id="gender" style="width:100%;">
+                        <option value="남">남</option>
+                        <option value="여">여</option>
+                    </select></div>
+            </div>
+            <br/>
+            <div class="guide">거주하고 계신 지역을 설정해주세요.</div>
+            <div class="ui-grid-a">
+                <div class="ui-block-a" style="width:45%;float:left;">
+                    <a href="#address_si_list2" data-rel="popup" data-position-to="window">
+                        <input type="text" ng-model="user.address_si" placeholder="시" readonly/>
+                    </a>
+                </div>
+                <div class="ui-block-b" style="width:45%;float:right;">
+                    <a href="#address_gu_list2" data-rel="popup" data-position-to="window">
+                        <input type="text" ng-model="user.address_gu" placeholder="구" readonly/>
+                    </a>
+                </div>
+            </div>
+            <br/>
+            <div class="guide">학생일 경우, 재학중인 학교/학년을 설정해주세요.</div>
+            <input type="text" ng-model="school_name" name="school_name" id="school_name" placeholder="학교 검색"/>
+            <input type="text" ng-model="grade" name="grade" id="grade" placeholder="학년"/>
+            <br/>
+            <button ng-click="join()">가입하기</button>
+        </form>
+    </section>
+</div>
+
+
+
+
+
+
+
+<div id='login' data-role='page' data-title="login" ng-controller="loginCtrl">
+    <div data-role="popup" id="warning2" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>{{warning_msg}}</p>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="../images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#home' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <section data-role='content'>
+        <label for="basic">로그인하기</label>
+        <input type="email" ng-model="email" placeholder="이메일" />
+        <input type="password" ng-model="pw" placeholder="비밀번호"/>
+        <a href='#find_pw' id="find_pw_btn" data-role="button">비밀번호 찾기</a>
+        <br/><br/><br/><br/><br/>
+        <button ng-click="doLogin()">로그인</button>
+        <a href='/member' id="login_cancel" data-role="button">취소</a>
+    </section>
+</div>
+
+
+<div id='find_pw' data-role='page' data-title="find_pw">
+    <header data-role='header' data-theme='c'>
+        <h1><img src="../images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#home' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+
+    <section data-role='content'>
+        <form name="login_frm" data-ajax="false" action="/member/send_pw" method="POST">
+            <label for="basic">이메일</label>
+            <input type="email" name="email" id="email"  value="" placeholder="이메일" />
+            <!--<input type="password" name="pw" id="pw" value="1234"  placeholder="비밀번호"/>-->
+            <br/><br/><br/><br/><br/>
+            <input id="login_submit" type="submit" value="비밀번호 찾기"/>
+            <a href='#login' id="login_cancel" data-role="button">취소</a>
+        </form>
+    </section>
+
+</div>
+
+
+
+
+
+
+<div id="main" data-role="page" data-title='main' ng-controller="mainCtrl">
+
+    <div data-role="popup" id="choose_write" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
+        <div data-role="header" data-theme="a">
+            <h1>choose What</h1>
+        </div>
+        <div role="main" class="ui-content">
+            <!--<h3 class="ui-title">Are you sure you want to delete this page?</h3>-->
+            <p>무엇을 작성하실껀가요?</p>
+            <a href="#board_write" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">게시물</a>
+            <a href="#course_write" class="ui-btn ui-corner-all ui-shadow ui-btn-inline ui-btn-b">수업</a>
+        </div>
+    </div>
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <a href='#sidebar' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" class="logo_header" alt='logo'/></h1>
+        <a href='#choose_write' data-rel="popup" data-icon='edit' data-iconpos='notext'></a>
+        <!--<a href='#write' data-icon='edit' data-iconpos='notext' ng-if='profile.isTutor == 0'></a>-->
+    </header>
+    <section data-role="content">
+        <div class="recommends_list" ng-if="recommends.length>0">
+            <div class="ui-grid-b" id="recommend" ng-repeat="recommend in recommends">
+                <div class="ui-block-a" style="width:30%;" ng-click="toProfile(recommend.email,recommend.isTutor)">
+                    <img src="/images/mini_normal.jpg" id = "recommend_thumbnail" alt='icon' ng-if="recommend.thumbnail == undefined"/>
+                    <img ng-src="{{recommend.thumbnail}}" id = "recommend_thumbnail" alt='icon' ng-if="recommend.thumbnail != undefined"/>
+                </div>
+                <div class="ui-block-b" style="width:45%;" ng-click="toProfile(recommend.email,recommend.isTutor)">
+                    <div id="recommend_inner">
+                        <a class="recommend_name">{{recommend.name}}</a>
+                        <a class="recommend_together" ng-if="recommend.together != 0">함께 아는 친구 {{recommend.together}}명</a><br/>
+                        <div id="subjects" ng-repeat="subject in recommend.subjects">
+                            <br ng-if="recommend.subjects.indexOf(subject)==2"/>
+                            <a class="subjects">{{subject}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-block-c" style="width:25%;"  ng-init="recommend.isFriend=0">
+                    <div id="recommend_inner" style="text-align: center"><!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px; "/>-->
+                        <button class="reqFriendBtn" ng-click="reqFriend(recommends.indexOf(recommend))" ng-if="!recommend.isFriend">친구 추가</button>
+                        <button class="delFriendBtn" ng-click="delFriend(recommends.indexOf(recommend))" ng-if="recommend.isFriend">친구 요청중</button>
+                    </div>
+                </div>
+            </div>
+            <div id="recommend_footer">
+                <a ng-href="#rcm_tutor">추천 더 보기</a>
+            </div>
+        </div>
+
+
+        <div id="state_list" ng-repeat="st in state">
+            <div class="ui-grid-a state_item" id="state_{{state.indexOf(st)}}" del-drag="delState(state.indexOf(st))">
+                <div class="ui-block-a" style="width:40%;" >
+                    <img src="/images/mini_normal.jpg" id = "friend_from_thumbnail" alt='icon' ng-if="st.friend_from_thumbnail == null"/>
+                    <img ng-src="{{st.friend_from_thumbnail}}" id = "friend_from_thumbnail" alt='icon' ng-if="st.friend_from_thumbnail != null"/>
+                    <img src="/images/mini_normal.jpg" id = "friend_to_thumbnail"  alt='icon' ng-if="st.friend_to_thumbnail == undefined"/>
+                    <img ng-src="{{st.friend_to_thumbnail}}" id = "friend_to_thumbnail" alt='icon' ng-if="st.friend_to_thumbnail != undefined"/>
+                </div>
+                <div class="ui-block-b" style="width:60%;">
+                    <div id="state_notice">
+                        <a id="state_name">{{st.friend_from_name}}</a>님과
+                        <a id="state_name">{{st.friend_to_name}}</a>님이  <br/>
+                        친구가 되었습니다.
+                    </div>
+                </div>
+                <!--<div class="ui-block-c" style="width:10%;">-->
+                <!--<img src="/images/post_x.png" style="max-height: 35px; max-width: 100%">-->
+                <!--</div>-->
+            </div>
+        </div>
+
+
+        <div class="board_list">
+            <div ng-repeat="item in boards" ng-if="boards.length>0">
+                <div class ="board" ng-if="item.isBoard">
+                    <div class="ui-grid-b" id = "board_header" ng-click="toProfile(item.actor,item.isTutor)">
+                        <div class="ui-block-a board_actor" style="width:15%;">
+                            <img src="/images/mini_normal.jpg" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="item.actor_thumbnail == null"/>
+                            <img ng-src="{{item.actor_thumbnail}}" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="item.actor_thumbnail != null"/>
+                        </div>
+                        <div class="ui-block-b" style="width:85%;" ng-if="item.cate == 3">
+                            <a class="board_name">{{item.actor_name}}</a>
+                            <a style="float: right">{{item.regdate}}</a>
+                        </div>
+                        <div class="ui-block-b" style="width:85%;" ng-if="item.cate == 4">
+                            <a id="board_name">{{item.actor_name}}</a> 님이 댓글을 달았습니다.
+                            <a style="float: right">{{item.regdate}}</a>
+                        </div>
+                        <div class="ui-block-b" style="width:85%;" ng-if="item.cate == 5">
+                            <a id="board_name">{{item.actor_name}}</a> 님이 좋아합니다.
+                            <a style="float: right">{{item.regdate}}</a>
+                        </div>
+                    </div>
+                    <div id="board_title" ng-click="toBoard(item.num)">
+                        <p>{{item.title}}</p>
+                    </div>
+                    <div id="board_content" ng-click="toBoard(item.num)">
+                        <a>{{item.content}}</a>
+                    </div>
+                    <div id="board_picture" ng-if="item.thumbnail" ng-click="toBoard(item.num)">
+                        <img ng-src="{{item.thumbnail}}" id = "board_thumbnail" alt='board_thumbnail'/>
+                    </div>
+                    <div class="board_footer_1">
+                        <div class="ui-grid-a" id="recommend_profile">
+                            <div class="ui-block-a" style="width:50%; border-right: 1px solid #CCCCCC">
+                                <a>좋아요 {{item.good}}개</a>
+                            </div>
+                            <div class="ui-block-b" style="width:50%;">
+                                <a>댓글 {{item.cmt}}개</a>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--isBoard-->
+
+                <div class ="course" ng-if="!item.isBoard">
+                    <div class="ui-grid-b" id = "course_header" ng-if="item.cate == 1">
+                        <div class="ui-block-a" id="course_actor" style="width:15%;">
+                            <img src="/images/mini_normal.jpg" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="item.actor_thumbnail == null"/>
+                            <img ng-src="{{item.actor_thumbnail}}" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="item.actor_thumbnail != null"/>
+                        </div>
+                        <div class="ui-block-b" style="width:85%;">
+                            <a class="board_name">{{item.actor_name}}</a>
+                            <a style="float: right">{{item.regdate}}</a>
+                        </div>
+                    </div>
+                    <div class="ui-grid-b" id = "course_header" ng-if="item.cate == 2">
+                        새로운 후기가 달렸습니다.
+                    </div>
+                    <div id="course_title" ng-click="toCourse(item.num)">
+                        <p>{{item.title}}</p>
+                    </div>
+                    <div id="course_content" ng-click="toCourse(item.num)">
+                        <a>{{item.content}}</a>
+                    </div>
+                    <div id="course_picture" ng-if="item.thumbnail != null" ng-click="toCourse(item.num)">
+                        <img ng-src="{{item.thumbnail}}" id = "course_thumbnail" alt='course_thumbnail' />
+                    </div>
+                    <!--<div id="course_content" ng-if="item.thumbnail == null" ng-click="toCourse(item.num)">-->
+                    <!--<div id="board_content_inner">-->
+                    <!--<div id="course_title">{{item.title}}</div>-->
+                    <!--<a>{{item.content}}</a>-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                </div><!--isCourse-->
+            </div><!--ng-repeat-->
+        </div>
+    </section>
+    <!--     <footer data-role="footer" data-position="fixed">
+          <h1>Copyleft My Company</h1>
+        </footer> -->
+</div>
+
+
+
+
+<div id="notice" data-role="page" data-title='notice' ng-controller="noticeCtrl">
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <a href='#main' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><!--<img src="/images/hellotutor2.png" id = "logo_header" alt='logo'/>-->메세지</h1>
+    </header>
+    <section data-role="content">
+        <h4>공지사항</h4>
+        <div class="notice" ng-repeat="item in notice">
+            <div id="notice_header">
+                <div class="ui-grid-a" style=" max-height: 100%">
+                    <div class="ui-block-a" style="width:20%;">
+                        <a>
+                            <img src="/images/icon.png" id = "profile_thumbnail" style="height: 50px;" alt='icon'/>
+                        </a>
+                    </div>
+                    <div class="ui-block-b" style="width:80%;float:left;">
+                        <a id="hello_tutor">Hello Tutor</a><br/>
+                        <a id="regdate">{{item.regdate}}</a>
+                    </div>
+                </div>
+            </div>
+            <div id="notice_content">
+                {{item.content}}
+            </div>
+        </div>
+
+    </section>
+    <!--     <footer data-role="footer" data-position="fixed">
+          <h1>Copyleft My Company</h1>
+        </footer> -->
+
+</div>
+
+<div id="alarm" data-role="page" data-title='alarm' ng-controller="alarmCtrl">
+
+<sidebar></sidebar>
+
+<div data-role="popup" id="send_message" data-theme="a" class="ui-corner-all">
+    <div style="padding:10px 20px;">
+        <h3><!--<img src="/images/notice_h.png" style="max-height: 100%">-->메세지 보내기</h3>
+        <!--<label for="un" class="ui-hidden-accessible">Username:</label>-->
+        <!--<input type="text" name="user" id="un" value="" placeholder="username" data-theme="a">-->
+        <!--<label for="pw" class="ui-hidden-accessible">Password:</label>-->
+        <!--<input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a">-->
+        <textarea ng-model="content"></textarea>
+        <button type="button" ng-click="send_message()">메세지 보내기</button>
+    </div>
+</div>
+
+<!--<div data-role="popup" id="del_dialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">-->
+<!--<div data-role="header" data-theme="a">-->
+<!--<h1>알림 삭제</h1>-->
+<!--</div>-->
+<!--<div role="main" class="ui-content">-->
+<!--<p>이 알림를 삭제하시겠습니까?</p>-->
+<!--<a href="#" data-rel="back">취 소</a>-->
+<!--<a href="#" data-rel="button" data-transition="flow" onclick="del_alarm()">삭 제</a>-->
+<!--</div>-->
+<!--</div>-->
+
+
+<div data-role="popup" id="req_reject" data-overlay-theme="b" data-theme="b" data-dismissible="false" data-transition="flow" style="max-width:400px;">
+    <div data-role="header" data-theme="a">
+        <h1>요청 거절</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <p>친구 요청을 거절하시겠습니까?</p>
+        <a href="#" data-rel="back">취 소</a>
+        <a href="#" data-rel="button" data-transition="flow" ng-click="reject_alarm()">거 절</a>
+    </div>
+</div>
+
+<div data-role="popup" id="req_accept" data-overlay-theme="b" data-theme="b" data-dismissible="false" data-transition="flow" style="max-width:400px;">
+    <div data-role="header" data-theme="a">
+        <h1>요청 수락</h1>
+    </div>
+    <div role="main" class="ui-content">
+        <p>친구 요청을 수락하시겠습니까?</p>
+        <a href="#" data-rel="back">취 소</a>
+        <a href="#" data-rel="button" data-transition="flow" ng-click="accept_alarm()">수 락</a>
+    </div>
+</div>
+
+<!--<div data-role="popup" id="success_message" class="ui-content" data-theme="a" style="max-width:350px;">-->
+<!--<p>메세지를 전송하였습니다.</p>-->
+<!--</div>-->
+
+<header data-role='header' data-theme='c'>
+    <a href='#main' data-icon='bullets' data-iconpos='notext'></a>
+    <h1><!--<img src="/images/hellotutor2.png" id = "logo_header" alt='logo'/>-->알 림</h1>
+</header>
+
+
+
+
+
+<section data-role="content">
+
+    <div ng-repeat="item in alarm">
+        <div class="alarm_item" ng-if="item.cate == 1" del-drag="delAlarm(alarm.indexOf(item))">
+            <div id="alarm_header" class="ui-grid-a" ng-click="toProfile(item.acter,item.isTutor)">
+                <div class="ui-block-a" style="width:20%;">
+                    <a>
+                        <img src="/images/mini_normal.jpg" id = "profile_thumbnail" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "profile_thumbnail" ng-if="item.thumbnail != null"/>
+                    </a>
+                </div>
+                <div class="ui-block-b" style="width:80%;float:left;">
+                    <a id="from_name">{{item.name}}</a><br/>
+                    <a id="regdate">{{item.regdate}}</a>
+                </div>
+            </div>
+            <div id="alarm_content" ng-click="toBoard(item.target_num)">
+                {{item.name}} 님깨서 <b>{{profile.name}}</b>님의 게시물 <b>{{item.board_title}}</b> 에 댓글을 달았습니다.
+            </div>
+        </div><!--cate==1-->
+
+
+        <div class="alarm_item"  ng-if="item.cate == 2" del-drag="delAlarm(alarm.indexOf(item))">
+            <div id="alarm_header" class="ui-grid-a" ng-click="toProfile(item.acter,item.isTutor)">
+                <div class="ui-block-a" style="width:20%;">
+                    <a>
+                        <img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail != null"/>
+                    </a>
+                </div>
+                <div class="ui-block-b" style="width:80%;float:left;">
+                    <a id="from_name">{{item.name}}</a><br/>
+                    <a id="regdate">{{item.regdate}}</a>
+                </div>
+            </div>
+            <div id="alarm_content">
+                {{item.content}}
+            </div>
+            <div id="alarm_footer">
+                <!--<a href='#send_message' data-rel="popup"  data-position-to="window" data-transition="pop">-->
+                <div style="background-color: #6699FF !important; color: #FFFFFF;" data-transition="flip" ng-click="open_message_frm(alarm.indexOf(item))">
+                    답 장
+                </div>
+            </div>
+        </div>
+
+        <div class="alarm_item" ng-if="item.cate == 3" del-drag="delAlarm(alarm.indexOf(item))">
+            <div id="alarm_header"  class="ui-grid-a">
+                <div class="ui-block-a" style="width:20%;">
+                    <a>
+                        <img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail == null"/>
+                    </a>
+                </div>
+                <div class="ui-block-b" style="width:80%;float:left;">
+                    <a id="from_name">*****</a><br/>
+                    <a id="regdate">{{item.regdate}}</a>
+                </div>
+            </div>
+            <div id="alarm_content" ng-click="toCourse(item.target_num)">
+                ***** 님깨서 <b>{{profile.name}}</b>님의 수업  <b>{{item.course_title}}</b> 에 리뷰를 달았습니다.
+            </div>
+        </div>
+
+        <div class="alarm_item" ng-if="item.cate == 4" del-drag="delAlarm(alarm.indexOf(item))">
+            <div id="alarm_header" class="ui-grid-a" ng-click="toProfile(item.acter,item.isTutor)">
+                <div class="ui-block-a" style="width:20%;">
+                    <a>
+                        <img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail != null"/>
+                    </a>
+                </div>
+                <div class="ui-block-b" style="width:80%;float:left;">
+                    <a id="from_name">{{item.name}}</a><br/>
+                    <a id="regdate">{{item.regdate}}</a>
+                </div>
+            </div>
+            <div id="alarm_content">
+                {{item.name}} 님깨서 친구 요청을 하였습니다.
+            </div>
+            <div id="alarm_footer">
+                <div class="ui-grid-a">
+                    <!--<a href='#send_message' data-rel="popup"  data-position-to="window" data-transition="pop">-->
+                    <div class="ui-block-a" style="width:50%; background-color: #6699FF !important; color: #FFFFFF;" ng-click="accept_alarm_dialog(alarm.indexOf(item))">
+                        수 락
+                    </div>
+                    <div class="ui-block-b" style="width:50%; background-color: #F0F0F0 !important; color: #666666" ng-click="reject_alarm_dialog(alarm.indexOf(item))">
+                        거 절
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="alarm_item"  ng-if="item.cate == 5" del-drag="delAlarm(alarm.indexOf(item))">
+            <div id="alarm_header"  class="ui-grid-a" ng-click="toProfile(item.acter,item.isTutor)">
+                <div class="ui-block-a" style="width:20%;">
+                    <a>
+                        <img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail != null"/>
+                    </a>
+                </div>
+                <div class="ui-block-b" style="width:80%;float:left;">
+                    <a id="from_name">{{item.name}}</a><br/>
+                    <a id="regdate">{{item.regdate}}</a>
+                </div>
+            </div>
+            <div id="alarm_content">
+                {{item.name}} 님깨서 친구 요청을 수락하였습니다.
+            </div>
+        </div>
+
+
+        <div class="alarm_item" ng-if="item.cate == 6" del-drag="delAlarm(alarm.indexOf(item))">
+            <div id="alarm_header"  class="ui-grid-a" ng-click="toProfile(item.acter,item.isTutor)">
+                <div class="ui-block-a" style="width:20%;">
+                    <img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail == null"/>
+                    <img ng-src="{{item.thumbnail}}" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail != null"/>
+                </div>
+                <div class="ui-block-b" style="width:80%;float:left;">
+                    <a id="from_name">{{item.name}}</a><br/>
+                    <a id="regdate">{{item.regdate}}</a>
+                </div>
+            </div>
+            <div id="alarm_content">
+                {{item.name}} 님깨서 친구를 끊었습니다.
+            </div>
+        </div>
+
+
+        <div class="alarm_item"  ng-if="item.cate == 7" del-drag="delAlarm(alarm.indexOf(item))">
+            <div id="alarm_header"  class="ui-grid-a" ng-click="toProfile(item.acter,item.isTutor)">
+                <div class="ui-block-a" style="width:20%;">
+                    <a>
+                        <img src="/images/mini_normal.jpg" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "profile_thumbnail" style="height: 50px;" ng-if="item.thumbnail != null"/>
+                    </a>
+                </div>
+                <div class="ui-block-b" style="width:80%;float:left;">
+                    <a id="from_name">{{item.name}}</a><br/>
+                    <a id="regdate">{{item.regdate}}</a>
+                </div>
+            </div>
+            <div id="alarm_content">
+                {{item.name}} 님깨서 팔로우를 했습니다.
+            </div>
+        </div>
+    </div>
+
+
+</section>
+<!--     <footer data-role="footer" data-position="fixed">
+      <h1>Copyleft My Company</h1>
+    </footer> -->
+
+</div>
+
+
+
+<div id="rcm_tutor" data-role="page" data-title='rcm_tutor' ng-controller="rcm_tutorCtrl">
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href="#main" data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#" data-ajax="false" class="ui-btn-active">선생님</a></li>
+            <li><a href="#rcm_user" data-ajax="false">일반</a></li>
+        </ul>
+    </div>
+    <section data-role='content'>
+
+        <!--<ul data-role="listview">-->
+        <div style="margin : 10px;">
+            <a>지인을 찾아보세요</a>
+        </div>
+        <div ng-repeat="item in list">
+            <div class="recommends_list">
+                <div class="ui-grid-b" id="recommend">
+                    <div class="ui-block-a" style="width:30%;" ng-click="toProfile(item.email,1)">
+                        <img src="/images/mini_normal.jpg" id = "recommend_thumbnail"  ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "recommend_thumbnail"   ng-if="item.thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:45%;" ng-click="toProfile(item.email,1)">
+                        <div id="recommend_inner">
+                            <a class="recommend_name">{{item.name}}</a>
+                            <a class="recommend_together" ng-if="item.together != 0">함께 아는 친구 {{item.together}}명</a><br/>
+                            <div id="subjects" ng-repeat="subject in item.subjects">
+                                <br ng-if="item.subjects.indexOf(subject)==2"/>
+                                <a class="subjects">{{subject}}</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui-block-c" style="width:25%;" >
+                        <div id="recommend_inner" style="text-align: center" ng-init="item.isFriend=0"><!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px; "/>-->
+                            <button class="reqFriendBtn" ng-click="reqFriend(list.indexOf(item))" ng-if="!item.isFriend">친구 추가</button>
+                            <button class="delFriendBtn" ng-click="delFriend(list.indexOf(item))" ng-if="item.isFriend">친구 요청중</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--</ul>-->
+    </section>
+</div>
+
+
+
+<div id="rcm_user" data-role="page" data-title='rcm_user' ng-controller="rcm_userCtrl">
+    <sidebar></sidebar>
+
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href="#main" data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#rcm_tutor" data-ajax="false">선생님</a></li>
+            <li><a href="" data-ajax="false" class="ui-btn-active">일반</a></li>
+        </ul>
+    </div>
+    <section data-role='content'>
+
+        <!--<ul data-role="listview">-->
+        <div style="margin : 10px;">
+            <a>지인을 찾아보세요</a>
+        </div>
+        <div ng-repeat="item in list">
+            <div class="recommends_list">
+                <div class="ui-grid-b" id="recommend">
+                    <div class="ui-block-a" style="width:30%;" ng-click="toProfile(item.email,0)">
+                        <img src="/images/mini_normal.jpg" id = "recommend_thumbnail" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "recommend_thumbnail" ng-if="item.thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:45%;" ng-click="toProfile(item.email,0)">
+                        <div id="recommend_inner">
+                            <a class="recommend_name">{{item.name}}</a>
+                            <br ng-if="item.together>0"/>
+                            <a class="recommend_together" ng-if="item.together>0">함께아는 친구 {{item.together}}명</a>
+                            <br/><a class="recommend_address">{{item.address_si}} {{item.address_gu}}</a><br/>
+                        </div>
+                    </div>
+                    <div class="ui-block-c" style="width:25%;" >
+                        <div id="recommend_inner" style="text-align: center" ng-init="item.isFriend=0"><!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px; "/>-->
+                            <button class="reqFriendBtn" ng-click="reqFriend(list.indexOf(item))" ng-if="!item.isFriend">친구 추가</button>
+                            <button class="delFriendBtn" ng-click="delFriend(list.indexOf(item))" ng-if="item.isFriend">친구 요청중</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--</ul>-->
+    </section>
+</div>
+
+
+
+<div id="message" data-role="page" data-title='message' ng-controller="messageCtrl">
+    <header data-role='header' data-theme='c'>
+        <a href='#main' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><!--<img src="/images/hellotutor2.png" id = "logo_header" alt='logo'/>-->메세지</h1>
+    </header>
+
+    <div data-role="popup" id="send_message" data-transition="flip"  data-theme="a" class="ui-corner-all">
+        <div style="padding:10px 20px;">
+            <h3>메세지 보내기</h3>
+            <textarea ng-model="content"></textarea>
+            <button type="button" ng-click="send_message()">메세지 보내기</button>
+        </div>
+    </div>
+
+    <!--<div data-role="popup" id="del_dialog" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">-->
+    <!--<div data-role="header" data-theme="a">-->
+    <!--<h1>메세지 삭제</h1>-->
+    <!--</div>-->
+    <!--<div role="main" class="ui-content">-->
+    <!--<p>이 메세지를 삭제하시겠습니까?</p>-->
+    <!--<a href="#" data-rel="back">취 소</a>-->
+    <!--<a href="#" data-rel="button" data-transition="flow" onclick="del_message()">삭 제</a>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+
+
+    <section data-role="content">
+        <h4>메세지</h4>
+        <div ng-repeat="item in list">
+            <div class="message" del-drag="delMessage(list.indexOf(item))">
+                <div id="message_header" class="ui-grid-a" ng-click="toProfile(profile.email,profile.isTutor)">
+                    <div class="ui-block-a" style="width:20%;">
+                        <img src="/images/mini_normal.jpg" id = "profile_thumbnail" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "profile_thumbnail" ng-if="item.thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b inner" style="width:80%; height: 50px">
+                        <a id="from_name">{{item.from_name}}</a>
+                        <a id="senddate">{{item.senddate}}</a>
+                    </div>
+                </div>
+                <div id="message_content">
+                    {{item.content}}
+                </div>
+                <div id="message_footer">
+                    <!--<div class="ui-block-a" style="width:100%; background-color: #6699FF !important; color: #FFFFFF;" onclick="open_message_frm()">-->
+                    <!--답 장-->
+                    <!--</div>-->
+                    <div id="responseBtn" ng-click="open_message_frm(list.indexOf(item))">답 장</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--     <footer data-role="footer" data-position="fixed">
+          <h1>Copyleft My Company</h1>
+        </footer> -->
+</div>
+
+
+<div id="search_user" data-role="page" data-title='search_user' ng-controller="searchUserCtrl">
+
+    <sidebar></sidebar>
+
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#main' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#search_user" data-ajax="false" class="ui-btn-active">사람</a></li>
+            <li><a href="#search_tutor" data-ajax="false">선생님</a></li>
+            <li><a href="#search_course" data-ajax="false">수업</a></li>
+        </ul>
+    </div>
+    <div class="ui-grid-a">
+        <div class="ui-block-a" style="width:90%; vertical-align: middle">
+            <input type="text" ng-model="keyword"/>
+        </div>
+        <div class="ui-block-b" style="width:10%; vertical-align: middle">
+            <input type="button" data-icon='search' data-iconpos='notext' ng-click="search()"/>
+        </div>
+    </div>
+    <section data-role='content'>
+        <ul data-role="listview" id="user_list">
+            <li ng-repeat="item in list">
+                <div class="ui-grid-b" id="search_user">
+                    <div class="ui-block-a" style="width:30%;" ng-click="toProfile(item.email,0)">
+                        <img src="/images/mini_normal.jpg" id = "search_thumbnail" ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "search_thumbnail" ng-if="item.thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:50%;" ng-click="toProfile(item.email,0)">
+                        <div id="search_user_inner">
+                            <a class="user_name">{{item.name}}</a>
+                            <br ng-if="item.together>0"/><a class="user_together" ng-if="item.together>0">함께아는 친구 {{item.together}}명</a>
+                            <br ng-if="school_name != null"/><a class="user_address" ng-if="school_name != null">{{item.school_name}} {{item.grade}}학년</a><br ng-if="school_name != null"/>
+                            <br ng-if="school_name == null"/><a class="user_address" ng-if="school_name == null">{{item.address_si}} {{item.address_gu}}</a><br/>
+                        </div>
+                    </div>
+                    <div class="ui-block-c" style="width:20%;">
+                        <div id="search_user_inner" style="text-align: center"><!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px; "/>-->
+                            <button class="reqFriendBtn" ng-click="reqFriend(recommend.email)" ng-if="!recommend.isFriend" ng-init="recommend.isFriend=0">친구 추가</button>
+                            <button class="delFriendBtn" ng-click="delFriend(recommend.email)" ng-if="recommend.isFriend">친구 요청중</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+
+
+<div id="search_tutor" data-role="page" data-title='search_tutor' ng-controller="searchTutorCtrl">
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#main' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#search_user" data-ajax="false" >사람</a></li>
+            <li><a href="#search_tutor" data-ajax="false" class="ui-btn-active">선생님</a></li>
+            <li><a href="#search_course" data-ajax="false">수업</a></li>
+        </ul>
+    </div>
+    <div class="ui-grid-a">
+        <div class="ui-block-a" style="width:90%; vertical-align: middle">
+            <input type="text" ng-model="keyword"/>
+        </div>
+        <div class="ui-block-b" style="width:10%; vertical-align: middle">
+            <input type="button" data-icon='search' data-iconpos='notext' ng-click="search()"/>
+        </div>
+    </div>
+    <section data-role='content'>
+        <ul data-role="listview" id="user_list">
+            <li ng-repeat="item in list">
+                <div class="ui-grid-b" id="search_user">
+                    <div class="ui-block-a" style="width:30%;" ng-click="toProfile(item.email,1)">
+                        <a>
+                            <img src="/images/mini_normal.jpg" id = "search_thumbnail" ng-if="item.thumbnail == null"/>
+                            <img ng-src="{{item.thumbnail}}" id = "search_thumbnail" ng-if="item.thumbnail != null"/>
+                        </a>
+                    </div>
+                    <div class="ui-block-b" style="width:50%;" ng-click="toProfile(item.email,1)">
+                        <div id="search_user_inner">
+                            <a class="user_name">{{item.name}}</a>
+                            <a class="user_together" ng-if="item.together>0">     함께아는 친구 {{item.together}}명</a>
+                            <br ng-if="item.subjects.length>0"/><a class="subjects" ng-repeat="subject in item.subjects">{{subject}}</a>
+                            <br/><a class="user_address">{{item.address_si}} {{item.address_gu}}</a>
+                        </div>
+                    </div>
+                    <div class="ui-block-c" style="width:20%;">
+                        <div id="search_user_inner" style="text-align: center" ng-init="item.isFriend=0">
+                            <!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px;"/>-->
+                            <button class="reqFriendBtn" ng-click="reqFriend(list.indexOf(item))" ng-if="!item.isFriend">친구 추가</button>
+                            <button class="delFriendBtn" ng-click="delFriend(list.indexOf(item))" ng-if="item.isFriend">친구 요청중</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+
+
+<div id="search_course" data-role="page" data-title='search_course' ng-controller="searchCourseCtrl">
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#main' data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#search_user" data-ajax="false" >사람</a></li>
+            <li><a href="#search_tutor" data-ajax="false">선생님</a></li>
+            <li><a href="#search_course" data-ajax="false" class="ui-btn-active">수업</a></li>
+        </ul>
+    </div>
+    <div class="ui-grid-a">
+        <div class="ui-block-a" style="width:90%; vertical-align: middle">
+            <input type="text" ng-model="keyword"/>
+        </div>
+        <div class="ui-block-b" style="width:10%; vertical-align: middle">
+            <input type="button" data-icon='search' data-iconpos='notext' ng-click="search()"/>
+        </div>
+    </div>
+    <section data-role='content'>
+        <div data-role="listview" id="course_list">
+            <div class ="course" ng-repeat="item in list">
+                <div class="ui-grid-b" id = "course_header" ng-click="toProfile(item.email,1)">
+                    <div class="ui-block-a" id="course_actor" style="width:15%;">
+                        <img src="/images/mini_normal.jpg" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="item.user_thumbnail == null"/>
+                        <img ng-src="{{item.user_thumbnail}}" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="item.user_thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:85%;">
+                        <a class="board_name">{{item.name}}</a>
+                        <a style="float: right">{{item.regdate}}</a>
+                    </div>
+                </div>
+
+                <div class="ui-grid-a" id="course_content" ng-if="item.thumbnail != null" ng-click="toCourse(item.num)">
+                    <div class="ui-block-a" style="width:40%;">
+                        <img ng-src="{{item.thumbnail}}" id = "course_thumbnail" alt='course_thumbnail' />
+                    </div>
+                    <div class="ui-block-b" style="width:60%;">
+                        <p>{{item.title}}</p>
+                        <a>{{item.content}}</a>
+                    </div>
+                </div>
+
+                <div id="course_content" ng-if="item.thumbnail == null">
+                    <div id="board_content_inner">
+                        <div id="course_title">{{item.title}}</div>
+                        <a>{{item.content}}</a>
+                    </div>
+                </div>
+
+            </div><!--isCourse-->
+        </div>
+    </section>
+</div>
+
+
+
+<div id="follower_list" data-role="page" data-title='follower_list' ng-controller="followerlistCtrl">
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href="#main" data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+
+            <li><a href="#friend_list" data-ajax="false">친구</a></li>
+            <li><a href="#follower_list" data-ajax="false" class="ui-btn-active">팔로워</a></li>
+        </ul>
+    </div>
+    <section data-role='content'>
+
+        <ul data-role="listview">
+            <div style="margin : 10px;">
+                <a>팔로워</a>
+            </div>
+            <li ng-repeat="item in list" class="recommends_list">
+                <div class="ui-grid-a" id="recommend">
+                    <div class="ui-block-a" style="width:30%;" ng-click="toProfile(item.email,item.isTutor)">
+                        <img src="/images/mini_normal.jpg" id = "recommend_thumbnail" alt='to_profile' ng-if="item.thumbnail == null"/>
+                        <img ng-src="{{item.thumbnail}}" id = "recommend_thumbnail" alt='to_profile' ng-if="item.thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:70%;" ng-click="toProfile(item.email,item.isTutor)">
+                        <div id="recommend_inner">
+                            <a class="recommend_name">{{item.name}}</a>
+                            <a class="recommend_together" ng-if="item.isTutor">     선생님</a>
+                            <a class="recommend_together" ng-if="!item.isTutor">     일반</a>
+                            <br ng-if="item.together>0"/>
+                            <a class="recommend_together" ng-if="item.together>0">함께아는 친구 {{item.together}}명</a>
+                            <br/><a class="recommend_address">{{item.address}}</a>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+
+
+
+<div id="friend_list" data-role="page" data-title='friend_list' ng-controller="friendlistCtrl">
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href="#main" data-icon='arrow-l' data-iconpos='notext'></a>
+        <!-- <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a> -->
+    </header>
+    <div data-role="navbar">
+        <ul>
+            <li><a href="#friend_list" data-ajax="false" class="ui-btn-active">친구</a></li>
+            <li><a href="#follower_list" data-ajax="false">팔로워</a></li>
+        </ul>
+    </div>
+    <section data-role='content'>
+
+        <ul data-role="listview">
+            <div style="margin : 10px;">
+                <a>친구</a>
+            </div>
+            <li ng-repeat="item in list" class="recommends_list">
+                <div class="ui-grid-a" id="recommend">
+                    <div class="ui-block-a" style="width:30%;" ng-click="toProfile(item.email,item.isTutor)">
+                        <a>
+                            <img src="/images/mini_normal.jpg" id = "recommend_thumbnail" alt='to_profile' ng-if="item.thumbnail == null"/>
+                            <img ng-src="{{item.thumbnail}}" id = "recommend_thumbnail" alt='to_profile' ng-if="item.thumbnail != null"/>
+                        </a>
+                    </div>
+                    <div class="ui-block-b" style="width:45%;" ng-click="toProfile(item.email,item.isTutor)">
+                        <div id="recommend_inner">
+                            <a class="recommend_name">{{item.name}}</a>
+                            <a class="recommend_together" ng-if="item.isTutor">     선생님</a>
+                            <a class="recommend_together" ng-if="!item.isTutor"     >일반</a>
+                            <br ng-if="item.together>0"/>
+                            <a class="recommend_together" ng-if="item.together>0">함께아는 친구 {{item.together}}명</a>
+                            <br/><a class="recommend_address">{{item.address}}</a>
+                        </div>
+                    </div>
+                    <div class="ui-block-c" style="width:25%;" >
+                        <div id="recommend_inner" style="text-align: center" ng-init="item.isFriend=2"><!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px; "/>-->
+                            <button class="reqFriendBtn" ng-click="reqFriend(recommend.email)" ng-if="item.isFriend==0">친구 추가</button>
+                            <button class="delFriendBtn" ng-click="delFriend(recommend.email)" ng-if="item.isFriend==1">친구 요청중</button>
+                            <button class="delFriendBtn" ng-click="delFriend(recommend.email)" ng-if="item.isFriend==2">친구 끊기</button>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </section>
+</div>
+
+
+
+<div id="tutor_simple" data-role="page" data-title='tutor_simple' ng-controller="tutorSimpleCtrl">
+    <sidebar></sidebar>
+
+
+    <div data-role="popup" id="send_message" data-theme="a" class="ui-corner-all" data-transition="pop"data-position-to="window">
+        <div style="padding:10px 20px;">
+            <h3>메세지 보내기</h3>
+            <textarea ng-model="content"></textarea>
+            <button type="button" ng-click="send_message()">메세지 보내기</button>
+        </div>
+    </div>
+
+    <div data-role="popup" id="success_message" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>메세지를 전송하였습니다.</p>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#main' data-icon='arrow-l' data-iconpos='notext'></a>
+    </header>
+    <section data-role='content'>
+
+        <div class = "profile">
+            <div class="ui-grid-b" id="profile_content">
+                <div class="ui-block-a" style="width: 40%;" ng-click="toDetail(tutor.email)">
+                    <img src="/images/mini_normal.jpg" id = "simple_profile" alt='to_profile' ng-if="tutor.thumbnail == null"/>
+                    <img ng-src="{{tutor.thumbnail}}" id = "simple_profile" alt='to_profile' ng-if="tutor.thumbnail != null"/>
+                </div>
+                <div class="ui-block-b" style="width: 45%;" ng-click="toDetail(tutor.email)">
+                    <div id="profile_info">
+                        <a id="profile_name">{{tutor.name}}</a>&nbsp&nbsp&nbsp<a id="profile_address">{{tutor.address_gu}}</a><br/>
+                        <div id="subjects" ng-repeat="subject in tutor.subjects">
+                            <br ng-if="tutor.subjects.indexOf(subject)==2"/>
+                            <a class="subjects">{{subject}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-block-c" style="width: 15%">
+                    <div id="message_btn">
+                        <a ng-click="open_message_frm()" >
+                            <img src="/images/circle_message2.png" id="profile_message_btn">
+                        </a>
+                        <!--<a href='/board/main/1' data-icon="info">메세지</a>-->
+                    </div>
+                </div>
+            </div>
+            <div class = "simple_profile_footer">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <div id="cancel_btn" ng-if="relation_me.isFriend == 0" ng-click ="friend_req(tutor.email)">친구 요청</div>
+                        <div id="cancel_btn" ng-if="relation_me.isFriend == 1" ng-click ="friend_break(tutor.email)">친구 요청 중</div>
+                        <div id="friendBtn" ng-if="relation_me.isFriend == 2" ng-click ="friend_break(tutor.email)">친구 ∨</div>
+                    </div>
+                    <div class="ui-block-b">
+                        <div id="cancel_btn" ng-if="relation_me.isFollow == 0" ng-click ="follow_req(tutor.email)">팔 로 우 X</div>
+                        <div id="followBtn" ng-if="relation_me.isFollow == 1" ng-click ="follow_break(tutor.email)">팔 로 우 ∨</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="relation_list">
+            <div class="ui-grid-a">
+                <div class="ui-block-a">
+                    <h5>친구</h5>
+                    <img ng-repeat="item in friend_list" ng-src="{{item.thumbnail}}">
+                </div>
+                <div class="ui-block-b">
+                    <h5>팔로워</h5>
+                    <img ng-repeat="item in follow_list" ng-src="{{item.thumbnail}}">
+                </div>
+            </div>
+        </div>
+        <div class="course_list" ng-if="courses.length>0">
+            <h4>수업</h4>
+            <div class="course" ng-repeat="course in courses" ng-click="toCourse(course.num)">
+                <div class="ui-grid-a " id="course_content" ng-if="course.thumbnail == null">
+                    <div id="course_content_inner">
+                        <div id="course_title">{{course.title}}</div>
+                        <a>{{course.one_line}}</a>
+                    </div>
+                </div>
+                <div id="course_content" ng-if="course.thumbnail != null">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a" style="width:40%;">
+                            <img ng-src="{{course.thumbnail}}" id = "course_thumbnail" alt='course_thumbnail'/>
+                        </div>
+                        <div class="ui-block-b" style="width:60%;">
+                            <div id="course_content_inner">
+                                <p>{{course.title}}</p>
+                                <a>{{course.one_line}}</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="course_footer">
+                    {{course.review_count}}개의 후기 더 보기
+                </div>
+            </div>
+            <br/>
+        </div>
+        <h4>게시물</h4>
+        <div class  ="board" ng-if="board != undefined" ng-click="toBoardList()">
+            <div id="board_header" style="height: 30px; ">
+                <div class="ui-grid-a" id="write_profile" style="height: 30px;" >
+                    <div class="ui-block-a" style="width:15%;">
+                        <img src="/images/mini_normal.jpg" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="tutor.thumbnail == null"/>
+                        <img ng-src="{{tutor.thumbnail}}" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="tutor.thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:85%;">
+                        <a class="board_name">{{board.name}}</a>
+                    </div>
+                </div>
+            </div>
+            <div id="board_title">
+                <p>{{board.title}}</p>
+            </div>
+            <div id="board_content">
+                <a>{{board.content}}</a>
+            </div>
+            <div id="board_picture" ng-if="board.thumbnail">
+                <img ng-src="{{board.thumbnail}}" id = "board_thumbnail" alt='board_thumbnail'/>
+            </div>
+            <div class="board_footer_1">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:50%; border-right: 1px solid #cccccc">
+                        <a>좋아요 {{board.good}}개</a>
+                    </div>
+                    <div class="ui-block-b" style="width:50%;">
+                        <a>댓글 {{board.cmt}}개</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<div id="user_simple" data-role="page" data-title='user_simple' ng-controller="userSimpleCtrl">
+
+    <sidebar></sidebar>
+
+    <div data-role="popup" id="send_message" data-theme="a" class="ui-corner-all" data-transition="pop"data-position-to="window">
+        <div style="padding:10px 20px;">
+            <h3>메세지 보내기</h3>
+            <textarea ng-model="content"></textarea>
+            <button type="button" ng-click="send_message()">메세지 보내기</button>
+        </div>
+    </div>
+
+    <div data-role="popup" id="success_message" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>메세지를 전송하였습니다.</p>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href="#main" data-icon='arrow-l' data-iconpos='notext'></a>
+        <a href='#info' data-icon='info' data-iconpos='notext' data-rel='dialog'></a>
+    </header>
+    <section data-role='content'>
+
+        <div class = "profile">
+            <div class="ui-grid-b" id="profile_content">
+                <div class="ui-block-a" style="width: 40%;">
+                    <img src="/images/mini_normal.jpg" id = "simple_profile" alt='to_profile' ng-if="user.thumbnail == null"/>
+                    <img ng-src="{{user.thumbnail}}" id = "simple_profile" alt='to_profile' ng-if="user.thumbnail != null"/>
+                </div>
+                <div class="ui-block-b" style="width: 45%; height: 120px;">
+                    <div id="profile_info">
+                        <a id="profile_name">{{user.name}}</a>&nbsp&nbsp&nbsp<a id="profile_address">{{user.address_gu}}</a><br/>
+                        <a id="school" ng-if="user.school_name != null">{{user.school_name}}</a>&nbsp<a id="grade" ng-if="user.grage != null">{{user.grade}}</a>
+                    </div>
+                </div>
+                <div class="ui-block-c" style="width: 15%">
+                    <div id="message_btn">
+                        <a ng-click="open_message_frm()" >
+                            <img src="/images/circle_message2.png" id="profile_message_btn">
+                        </a>
+                        <!--<a href='/board/main/1' data-icon="info">메세지</a>-->
+                    </div>
+                </div>
+            </div>
+            <div class = "simple_profile_footer">
+                <div id="cancel_btn" ng-if="relation_me == 0" ng-click ="friend_req(user.email)">친구 요청</div>
+                <div id="cancel_btn" ng-if="relation_me == 1" ng-click ="friend_break(user.email)">친구 요청 중</div>
+                <div id="friendBtn" ng-if="relation_me == 2" ng-click ="friend_break(user.email)">친구 ∨</div>
+            </div>
+        </div>
+
+        <div class="relation_list">
+            <h5>친구</h5>
+            <img ng-repeat="item in friend_list" ng-src="{{item.thumbnail}}">
+        </div>
+
+        <h4>소개글</h4>
+        <div id="about_me">
+            <p>{{user.about_me}}</p>
+        </div>
+
+        <h4>게시물</h4>
+        <div class  ="board" ng-if="board != undefined" ng-click="toBoardList()">
+            <div id="board_header" style="height: 30px; ">
+                <div class="ui-grid-a" id="write_profile" style="height: 30px;" >
+                    <div class="ui-block-a" style="width:15%;">
+                        <img src="/images/mini_normal.jpg" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="user.thumbnail == null"/>
+                        <img ng-src="{{user.thumbnail}}" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="user.thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:85%;">
+                        <a class="board_name">{{board.name}}</a>
+                    </div>
+                </div>
+            </div>
+            <div id="board_title">
+                <p>{{board.title}}</p>
+            </div>
+            <div id="board_content">
+                <a>{{board.content}}</a>
+            </div>
+            <div id="board_picture" ng-if="board.thumbnail">
+                <img ng-src="{{board.thumbnail}}" id = "board_thumbnail" alt='board_thumbnail'/>
+            </div>
+            <div class="board_footer_1">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:50%; border-right: 1px solid #cccccc">
+                        <a>좋아요 {{board.good}}개</a>
+                    </div>
+                    <div class="ui-block-b" style="width:50%;">
+                        <a>댓글 {{board.cmt}}개</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<div id="tutor_detail" data-role="page" data-title='tutor_detail' ng-controller="tutorDetailCtrl">
+
+    <sidebar></sidebar>
+
+
+    <div data-role="popup" id="send_message" data-theme="a" class="ui-corner-all" data-transition="pop"data-position-to="window">
+        <div style="padding:10px 20px;">
+            <h3>메세지 보내기</h3>
+            <textarea ng-model="content"></textarea>
+            <button type="button" ng-click="send_message()">메세지 보내기</button>
+        </div>
+    </div>
+
+    <div data-role="popup" id="message_result" class="ui-content" data-theme="a" style="max-width:350px;">
+        <p>{{message_result}}</p>
+    </div>
+
+    <header data-role='header' data-theme='c'>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#tutor_simple' data-icon='arrow-l' data-iconpos='notext'></a>
+        <a href='#modify' data-icon='edit' data-iconpos='notext' data-rel='popup' data-position-to="window" ng-show="profile.email == tutor.email"></a>
+    </header>
+    <section data-role='content'>
+
+        <div class = "profile">
+            <div class="ui-grid-b" id="profile_content">
+                <div class="ui-block-a" style="width: 40%;">
+                    <img src="/images/mini_normal.jpg" id = "simple_profile" alt='to_profile' ng-if="tutor.thumbnail == null"/>
+                    <img ng-src="{{tutor.thumbnail}}" id = "simple_profile" alt='to_profile' ng-if="tutor.thumbnail != null"/>
+                </div>
+                <div class="ui-block-b" style="width: 45%;">
+                    <div id="profile_info">
+                        <a id="profile_name">{{tutor.name}}</a>&nbsp&nbsp&nbsp<a id="profile_address">{{tutor.address_gu}}</a><br/>
+                        <div id="subjects" ng-repeat="subject in tutor.subjects">
+                            <br ng-if="tutor.subjects.indexOf(subject)==2"/>
+                            <a class="subjects">{{subject}}</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="ui-block-c" style="width: 15%">
+                    <div id="message_btn">
+                        <a ng-click="open_message_frm()" >
+                            <img src="/images/circle_message2.png" id="profile_message_btn">
+                        </a>
+                        <!--<a href='/board/main/1' data-icon="info">메세지</a>-->
+                    </div>
+                </div>
+            </div>
+            <div class = "simple_profile_footer">
+                <div class = "simple_profile_footer">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a">
+                            <div id="cancel_btn" ng-if="relation_me.isFriend == 0" ng-click ="friend_req(tutor.email)">친구 요청</div>
+                            <div id="cancel_btn" ng-if="relation_me.isFriend == 1" ng-click ="friend_break(tutor.email)">친구 요청 중</div>
+                            <div id="friendBtn" ng-if="relation_me.isFriend == 2" ng-click ="friend_break(tutor.email)">친구 ∨</div>
+                        </div>
+                        <div class="ui-block-b">
+                            <div id="cancel_btn" ng-if="relation_me.isFollow == 0" ng-click ="follow_req(tutor.email)">팔 로 우 X</div>
+                            <div id="followBtn" ng-if="relation_me.isFollow == 1" ng-click ="follow_break(tutor.email)">팔 로 우 ∨</div>
+                        </div>
+                    </div>
+                </div>
+                <!--
+                                <div class="ui-grid-a">
+                                    <div class="ui-block-a">
+                                        <input id="friend_btn" type="button" value="친구 요청" ng-if="relation_me.isFriend == 0" ng-click ="friend_req(tutor.email)">
+                                        <input id="friend_btn" type="button" value="친구 요청 중" ng-if="relation_me.isFriend == 1" ng-click ="friend_break(tutor.email)">
+                                        <input id="friend_btn" type="button" value="친구 ∨" ng-if="relation_me.isFriend == 2" ng-click ="friend_break(tutor.email)">
+                                    </div>
+                                    <div class="ui-block-b">
+                                        <input id="follow_btn" type="button" ng-if="relation_me.isFollow == 0" value="팔 로 우 X"  ng-click ="follow_req(tutor.email)">
+                                        <input id="follow_btn" type="button" ng-if="relation_me.isFollow == 1"  value="팔 로 우 ∨"  ng-click ="follow_break(tutor.email)">
+                                    </div>
+                                </div>-->
+            </div>
+        </div>
+
+        <h4>소개글</h4>
+        <div id="about_me">
+            <p>{{tutor.about_me}}</p>
+        </div>
+        <h4>경력</h4>
+        <div class="career_list" ng-repeat="career in tutor_career">
+            <div class="career" style="border:1px solid #cccccc;">
+                <div id="career_header" style="height: 40px; ">
+                    <a id="career_title">{{career.title}}</a><br/>
+                    <a id = "career_date">{{career.fromdate}} ~ {{career.todate}}</a>
+                </div>
+                <div id="career_content">
+                    <p>{{career.content}}</p>
+                </div>
+            </div>
+            <br/>
+        </div>
+
+        <h4>학력</h4>
+        <div id="academic">
+            <p>{{tutor.academic}}</p>
+        </div>
+
+        <h4>기타</h4>
+        <div id="etc">
+            <p>{{tutor.etc}}</p>
+        </div>
+
+        <h4>URL</h4>
+        <div style="padding: 10px;">
+            <div id="url_content" ng-repeat="url in URL">
+                <a>{{url.title}}</a><br/>
+                <a ng-href="http://{{url.url}}">{{url.url}}</a>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+<div id="course" data-role="page" data-title='course' ng-controller="courseCtrl">
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <a href='#main' data-icon='home' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+    </header>
+    <section data-role="content">
+        <div id="info_header">
+            <a id="writer" ng-click="toProfile(course.email)" style="float:left;">{{course.name}}</a> <a id="regdate" style="float:right">{{course.regdate}}</a>
+        </div>
+        <br/>
+        <div id="course_content">
+            <div id="course_img">
+                <img ng-src="{{course.photo}}">
+                <!--<img src="/images/class_default.png">-->
+            </div>
+            <div id="title">
+                <a>{{course.title}}</a>
+            </div>
+            <div id="subjects" ng-if="course.subjects.length!=0">
+                <ul id="course_subjects">
+                    <li ng-repeat="subject in course.subjects"><a id="subject">{{subject}}</a></li>
+                </ul>
+            </div>
+            <div id="one_line">
+                <h4>{{course.one_line}}</h4>
+            </div>
+            <div id="content">
+                <p>{{course.content}}</p>
+            </div>
+        </div>
+        <div class="course_footer_1">
+            <div class="write_reivew" ng-click="reviewFrm = !reviewFrm" ng-init="reviewFrm = 0">
+                <a>후기 쓰기</a>
+            </div>
+        </div>
+        <div id="review_form" ng-show="reviewFrm" >
+            <div class="ui-grid-b">
+                <div class="ui-block-a" style="width:70%;">
+                    <textarea ng-model="review_content"></textarea>
+                </div>
+                <div class="ui-block-b" style="width:30%; padding :10px">
+                    <!--<img src='/images/comment.png' style="max-width: 100%;">-->
+                    <button ng-click="writeReview()">리뷰 쓰기</button>
+                </div>
+            </div>
+        </div>
+        <div class="course_reviews">
+            <h4>수업후기</h4>
+            <div class = "review" ng-repeat="item in review">
+                <div id="review_header">
+                    <a id="regdate" style="float:right">{{item.regdate}}</a>
+                </div>
+                <div id="review_content">
+                    <p>{{item.content}}</p>
+                </div>
+                <div id="review_footer">
+                    <a id="review_good_{{review.indexOf(item)}}" style="float:right">좋아요 {{item.good}}개</a>
+                </div>
+
+                <div id="review_good_btn_{{review.indexOf(item)}}" style="text-align: center" ng-click="review_good_req(review.indexOf(item))" ng-if="item.isGood==0">
+                    좋아요
+                </div>
+                <div id="review_good_btn_{{review.indexOf(item)}}" style="text-align: center" ng-click="review_good_del(review.indexOf(item))" ng-if="item.isGood==1">
+                    좋아요 취소
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div id="board" data-role="page" data-title='board' ng-controller="boardCtrl">
+
+    <sidebar></sidebar>
+
+
+    <header data-role='header' data-theme='c'>
+        <a href='#main' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+    </header>
+
+    <section data-role="content">
+        <div class="board_outer">
+            <div id="read_header">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:50%;" ng-click="toProfile(board.writer,board.isTutor)">
+                        <a id="writer" style="float:left;">{{board.name}}</a>
+                    </div>
+                    <div class="ui-block-b" style="width:50%;">
+                        <a id="regdate" style="float:right">{{board.regdate}}</a>
+                    </div>
+                </div>
+            </div>
+            <div id="board_content">
+                <div id="board_imgs" style="text-align: center">
+                    <div ng-if="board.photo.length >1">
+                        <!--<div id="slides">-->
+                        <!--<img src="{{img}}" style="max-height: 300px; max-width: 100%;" ng-repeat="img in board.photo">-->
+                        <!--</div>-->
+                        <flex-slider slide="s in board.photo">
+                            <li>
+                                <img ng-src="{{s}}">
+                            </li>
+                        </flex-slider>
+                    </div>
+                    <img ng-if="board.photo.length == 1" ng-src="{{board.photo[0]}}" style="max-height: 300px; max-width: 100%; margin: 0px auto;">
+                </div>
+                <div id="title">
+                    <a>{{board.title}}</a>
+                </div>
+                <div id="content">
+                    <p>{{board.content}}</p>
+                </div>
+                <a ng-if="board.url1">link1 : {{board.url1}}</a>
+                <a ng-if="board.url2">link2 : {{board.url2}}</a>
+            </div>
+            <div class="board_footer_1">
+                <div class="ui-grid-b" id="recommend_profile">
+                    <div class="ui-block-a" style="width:33%; border-right: 1px solid #eeeeee;">
+                        <a id="good" ng-if="board.isGood == 0" ng-click="board_good_req()">좋아요 {{board.good}}개</a>
+                        <a id="good" ng-if="board.isGood == 1" ng-click="board_good_del()">좋아요 취소 {{board.good}}개</a>
+                    </div>
+                    <div class="ui-block-b" style="width:33%; border-right: 1px solid #eeeeee;">
+                        <a>댓글 {{board.cmt}}개</a>
+                    </div>
+                    <div class="ui-block-c" style="width:33%;" ng-click="show_cmt=!show_cmt" ng-init="show_cmt=0">
+                        <a>댓글 쓰기</a>
+                    </div>
+                </div>
+            </div>
+            <div id="cmt_form" ng-show="show_cmt">
+                <div class="ui-grid-a">
+                    <div class="ui-block-a" style="width:70%;">
+                        <textarea ng-model="comment_content"></textarea>
+                    </div>
+                    <div class="ui-block-b" style="width:30%; padding :10px">
+                        <!--<img src='/images/comment.png' style="max-width: 100%;">-->
+                        <button ng-click="writeComment()">댓글 쓰기</button>
+                    </div>
+                </div>
+            </div>
+            <div class="board_commends">
+                <h4>Comments</h4>
+                <div id = "comment" ng-repeat="item in comments">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a" style="width:20%; border-right: 1px solid #eeeeee;">
+                            <img ng-if="item.actor_thumbnail == null" src="/images/normal.png" style="width:100%;height: 100%;">
+                            <img ng-if="item.actor_thumbnail != null" ng-src="{{item.actor_thumbnail}}" style="width:100%;height: 100%;">
+                        </div>
+                        <div class="ui-block-b" style="width:80%;">
+                            <div id="comment_header">
+                                <a id="writer" style="float:left;">{{item.name}}</a> <a id="regdate" style="float:right">{{item.regdate}}</a>
+                            </div>
+                            <div id="comment_content">
+                                <p>{{item.content}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+<div id="board_list" data-role="page" data-title='board_list' ng-controller="boardListCtrl">
+
+    <sidebar></sidebar>
+
+    <header data-role='header' data-theme='c'>
+        <a href='#main' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+    </header>
+    <section data-role="content">
+        <div class="board" ng-repeat="board in list">
+            <div class="board_header">
+                <div class="ui-grid-b" id="write_profile" ng-click="toProfile(board.writer,board.isTutor)">
+                    <div class="ui-block-a" style="width:15%;">
+                        <img src="/images/mini_normal.jpg" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="board.writer_thumbnail == null"/>
+                        <img ng-src="{{board.writer_thumbnail}}" id = "to_profile" alt='to_profile' style="height: 30px;" ng-if="board.writer_thumbnail != null"/>
+                    </div>
+                    <div class="ui-block-b" style="width:85%;">
+                        <a class="board_name">{{board.name}}</a>
+                        <a style="color:#CCCCCC; font-size: 0.8em; float: right">{{board.regdate}}</a>
+                    </div>
+                </div>
+            </div>
+            <div id="board_title" ng-click="toBoard(board.num)">
+                <p>{{board.title}}</p>
+            </div>
+            <div id="board_content" ng-click="toBoard(board.num)">
+                <a>{{board.content}}</a>
+            </div>
+            <div id="board_picture" ng-if="board.thumbnail" ng-click="toBoard(board.num)">
+                <img ng-src="{{board.thumbnail}}" id = "board_thumbnail" alt='board_thumbnail'/>
+            </div>
+            <div class="board_footer_1" ng-click="toBoard(board.num)">
+                <div class="ui-grid-a" id="recommend_profile">
+                    <div class="ui-block-a" style="width:50%; border-right: 1px solid #CCCCCC">
+                        <a>좋아요 {{board.good}}개</a>
+                    </div>
+                    <div class="ui-block-b" style="width:50%;">
+                        <a>댓글 {{board.cmt}}개</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+
+
+
+
+<div id="board_write" data-role="page" data-title='board_write' ng-controller="boardWriteCtrl">
+
+    <sidebar></sidebar>
+    <header data-role='header' data-theme='c'>
+        <a href='#main' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#' data-icon='edit' data-iconpos='notext' ng-click="writeBoard()" ></a>
+    </header>
+    <section data-role="content">
+        <!--<form action="/board/write" method="post" id="writefrm" data-ajax="false" enctype="multipart/form-data">-->
+        <div id="write_content" style="height: auto; margin-bottom: 20px;">
+            <div id="write_title" style="height: 50px; border-bottom: 1px solid #EEEEEE; border-radius: 5px;">
+                <div class="ui-grid-a" style="background-color: #E6E6E6;">
+                    <div class="ui-block-a" style="width:20%; text-align: center;vertical-align: middle; border-right: 1px solid #EEEEEE; color : #999999;">
+                        <div class="write_element">
+                            제목
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="width:80%; vertical-align: middle;">
+                        <div class="write_element">
+                            <input type="text" ng-model="title" style="border: 0px; background-color: #E6E6E6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+            <textarea name="content" ng-model="content" id="content" placeholder="내용을 입력하세요." maxlength="1000" rows="20" style="height: 1000px;border: 0px; background-color: #E6E6E6;"></textarea>
+        </div>
+        <div class="ui-grid-a" style="height:50px;">
+            <div class="ui-block-a" style="width:20%; text-align: center;vertical-align: middle; border-right: 1px solid #EEEEEE; color : #999999;">
+                <!--<input type="button" data-icon="navigation" style="text-align: center; height: 100%">-->
+                <div class="write_element">
+                    url1
+                </div>
+            </div>
+            <div class="ui-block-b" style="width:80%; vertical-align: middle;">
+                <input type="text" ng-model="url1" style="border: 0px; background-color: #E6E6E6">
+            </div>
+        </div>
+
+        <div class="ui-grid-a" style="height:50px;">
+            <div class="ui-block-a" style="width:20%; text-align: center;vertical-align: middle; border-right: 1px solid #EEEEEE; color : #999999;">
+                <!--<input type="button" data-icon="navigation" style="text-align: center; height: 100%">-->
+                <div class="write_element">
+                    url2
+                </div>
+            </div>
+            <div class="ui-block-b" style="width:80%; vertical-align: middle;">
+                <input type="text" ng-model="url2" style="border: 0px; background-color: #E6E6E6">
+            </div>
+        </div>
+
+        <!--<div class="upload">-->
+        <input type="file" file-model="photo[0]" name="photo" id="photo_0" value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[1]" ng-show="photo[0] != null" name="photo" id="photo_1"  value="사진업로드" data-clear-btn="true" />
+        <input type="file" file-model="photo[2]" ng-show="photo[1] != null" name="photo" id="photo_2"  value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[3]" ng-show="photo[2] != null" name="photo" id="photo_3"  value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[4]" ng-show="photo[3] != null" name="photo" id="photo_4"  value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[5]" ng-show="photo[4] != null" name="photo" id="photo_5"  value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[6]" ng-show="photo[5] != null" name="photo" id="photo_6"  value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[7]" ng-show="photo[6] != null" name="photo" id="photo_7"  value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[8]" ng-show="photo[7] != null" name="photo" id="photo_8"  value="사진업로드" data-clear-btn="true"/>
+        <input type="file" file-model="photo[9]" ng-show="photo[8] != null" name="photo" id="photo_9"  value="사진업로드" data-clear-btn="true"/>
+        <!--</div>-->
+        <!--</form>-->
+    </section>
+</div>
+
+
+
+
+<div id="course_write" data-role="page" data-title='course_write' ng-controller="courseWriteCtrl">
+    <sidebar></sidebar>
+    <header data-role='header' data-theme='c'>
+        <a href='#m ain' data-icon='bullets' data-iconpos='notext'></a>
+        <h1><img src="/images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
+        <a href='#' data-icon='edit' data-iconpos='notext' ng-click="writeCourse()" ></a>
+    </header>
+    <section data-role="content">
+        <div id="write_content" style="height: auto; margin-bottom: 20px;">
+            <div id="write_title" style="height: 50px; border-bottom: 1px solid #EEEEEE; border-radius: 5px;">
+                <div class="ui-grid-a" style="background-color: #E6E6E6;">
+                    <div class="ui-block-a" style="width:20%; text-align: center;vertical-align: middle; border-right: 1px solid #EEEEEE; color : #999999;">
+                        <div class="write_element">
+                            제목
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="width:80%; vertical-align: middle;">
+                        <div class="write_element">
+                            <input type="text" ng-model="title" name="title" id="title" style="border: 0px; background-color: #E6E6E6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <div id="write_title" style="height: 50px; border-bottom: 1px solid #EEEEEE; border-radius: 5px;">
+                <div class="ui-grid-a" style="background-color: #E6E6E6;">
+                    <div class="ui-block-a" style="width:20%; text-align: center;vertical-align: middle; border-right: 1px solid #EEEEEE; color : #999999;">
+                        <div class="write_element">
+                            한줄소개
+                        </div>
+                    </div>
+                    <div class="ui-block-b" style="width:80%; vertical-align: middle;">
+                        <div class="write_element">
+                            <textarea ng-model="one_line" name="one_line" id="one_line" placeholder="한줄소개." maxlength="20" rows="20" style="border: 0px; background-color: #E6E6E6;"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br/>
+
+            <textarea ng-model="content" name="content" id="content" placeholder="내용을 입력하세요." maxlength="1000" rows="20" style="height: 1000px;border: 0px; background-color: #E6E6E6;"></textarea>
+        </div>
+
+        <!--<div class="upload">-->
+        <input type="file" file-model="photo" name="photo" id="photo_0" value="사진업로드" data-clear-btn="true"/>
+        <!--</div>-->
+    </section>
+</div>
+
+
+<div id="logout" data-role="page" data-title='logout' ng-controller="logoutCtrl">
+
+</div>
+
+</body>
+</html>
