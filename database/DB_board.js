@@ -24,6 +24,7 @@ exports.main = function(values,callback){
         if(err) msg.err_return(err,callback);
         else {
             async.parallel({
+                //일반인 추천
 //            function(callback){
 //                if(page == 1) {
 //                    connection.query(sql.recommend_user, [email, email, email, email, email, 0, size], function (err, rows, result) {
@@ -36,6 +37,7 @@ exports.main = function(values,callback){
 //                    });
 //                }
 //            },
+                //선생님 추천
                 "recommends": function (callback) {
                     if (page == 1) {
                         //사용자,사용자,사용자,사용자,0,2
@@ -45,7 +47,6 @@ exports.main = function(values,callback){
                             else if (rows.length) {
                                 async.each(rows,function(item,callback_each) {
                                     connection.query(sql.getSubject, [item.email], function (err, subjects, result) {
-                                        console.log(1);
                                         if (err) callback_each(err);
                                         else if (rows.length == 0) callback_each(null);
                                         else if (rows.length) {
@@ -65,6 +66,7 @@ exports.main = function(values,callback){
                         });
                     } else callback(null,[]);
                 },
+                //상태 업데이트
                 "state": function (callback) {
                     if (page == 1) {
                         connection.query(sql.relation_alram, [email], function (err, rows, result) {
@@ -73,7 +75,7 @@ exports.main = function(values,callback){
                         });
                     } else callback(null,[]);
                 },
-//            사용자 이메일,사용자 이메일,사용자 이메일,사용자 이메일,사용자 이메일,페이지
+                //게시물 가져오기
                 "boards": function (callback) {
                     connection.query(sql.getFeed, [email, email, email, email, email, limit_num], function (err, rows, result) {
                         if (err) callback(err);
@@ -91,7 +93,7 @@ exports.main = function(values,callback){
     // console.log('req.body = '+req.body);
 };
 
-
+//알고리즘 미적용 페이지
 exports.main2 = function(values,callback){
     //values = email, page
     var email = values.logined;
@@ -170,11 +172,10 @@ exports.main2 = function(values,callback){
             });
         }
     });
-
-    // console.log('req.body = '+req.body);
 };
 
 
+//게시물 리스트
 exports.list = function(values,callback){
     var pageSize = 100;
     var limit_num = (values.page-1)*pageSize;
@@ -396,107 +397,8 @@ exports.write = function(values,files,callback){
     })//getConnection
 };//function
 
-//
-//exports.write = function(values,files,callback){
-//    console.log("db들어옴")
-//    var inputs = {};
-//    inputs.email = values.logined;
-//    inputs.title = values.title;
-//    inputs.content = values.content;
-//    inputs.url1 = values.url1;
-//    inputs.url2 = values.url2;
-//    pool.getConnection(function(err,connection) {
-//        connection.beginTransaction(function(err) {
-//            if (err) { throw err; }
-//            connection.query(sql.write_board, /*[values.logined,values.title,values.content,values.url1,values.url2]*/inputs, function (err, result) {
-//                console.log(err);
-//                if (err || !result.affectedRows) {
-//                    connection.rollback(function() {
-//                        connection.release();
-//                    });
-//                }
-//                console.log(result);
-//                var target = result.insertId+"";
-//                photo.uploadfunc_board(target,files,function(err,result){
-//                    if(err){
-//                        connection.rollback(function() {
-//                            connection.release();
-//                        });
-//                    } else {
-//                        connection.query(sql.write_board_thumbnail,[result.thumbnail,target,values.logined], function (err, result) {
-//                            console.log(err);
-//                            if (err || !result.affectedRows) {
-//                                connection.rollback(function () {
-//                                    connection.release();
-//                                });
-//                            } else {
-//                                async.each(result.arr,function(item,callback_each){
-//                                    connection.query(sql.board_photo_insert,[item,target,target], function (err, result) {
-//                                        console.log(err);
-//                                        callback_each();
-//                                    });
-//                                },function(err){
-//                                    if (err) {
-//                                        connection.rollback(function () {
-//                                            connection.release();
-//                                        });
-//                                    }
-//                                    else{
-//                                        connection.commit(function(err) {
-//                                            if (err) {
-//                                                connection.rollback(function() {
-//                                                    connection.release();
-//                                                });
-//                                            } else{
-//                                                connection.release();
-//                                                callback(sql.success);
-//                                            }
-//                                        })
-//                                    }
-//                                })
-//                            );
-//                            }
-//                        });
-//                    }
-//                });
-//            });
-//        });
-//    })
-//};
-//
-
-//
-//
-//exports.write = function(values,callback){
-//    console.log("db들어옴")
-//    var inputs = {};
-//    inputs.email = values.logined;
-//    inputs.title = values.title;
-//    inputs.content = values.content;
-//    inputs.url1 = values.url1;
-//    inputs.url2 = values.url2;
-//
-//    console.log(inputs);
-//    pool.getConnection(function(err,connection) {
-//
-//        connection.query(sql.insert_board, /*[values.logined,values.title,values.content,values.url1,values.url2]*/inputs, function (err, result) {
-//            console.log(result);
-//            var message
-//            if (err || !result.affectedRows) {
-//                console.error('err', err);
-//                message = sql.fail
-//
-//            } else message = sql.success;
-//
-//            connection.release();
-//            callback(message);
-//        });
-//    });
-//}
-
-
 exports.modify = function(values,files,callback){
-    console.log("db들어옴")
+
     var inputs = {};
     inputs.num = values.num;
     inputs.email = values.logined;
@@ -581,9 +483,7 @@ exports.delete = function(values,callback){
 
 
 exports.write_comment = function(values,callback){
-    console.log("db들어옴")
 
-//    console.log(inputs);
     pool.getConnection(function(err,connection) {
         if (err) msg.err_return(err, callback);
         else {
@@ -618,7 +518,7 @@ exports.write_comment = function(values,callback){
 
 
 exports.modify_comment = function(values,callback){
-    console.log("db들어옴")
+
     var inputs = {};
     inputs.email = values.logined;
     inputs.grp = values.grp;
@@ -638,11 +538,6 @@ exports.modify_comment = function(values,callback){
 
 
 exports.delete_comment = function(values,callback){
-    var inputs = {};
-    inputs.email = values.logined;
-    inputs.grp = values.grp;
-    inputs.grp_num = values.grp_num;
-    inputs.content = values.content;
 
     pool.getConnection(function(err,connection) {
 
@@ -662,6 +557,7 @@ exports.good_req = function(values,callback){
     var input = {};
     input.grp = values.grp;
     input.email =values.logined;
+
     pool.getConnection(function(err,connection) {
 
         connection.query(sql.board_good_req,input, function (err, result) {
@@ -676,7 +572,7 @@ exports.good_req = function(values,callback){
 
 
 exports.good_del = function(values,callback){
-    console.log(values);
+
     pool.getConnection(function(err,connection) {
         connection.query(sql.board_good_del,[values.grp,values.logined], function (err, result) {
             console.log(this.sql);
