@@ -580,7 +580,7 @@ exports.follow_list2 = "select feeder,follower, u.name,u.address,u.isTutor,u.thu
     "WHERE feeder = ? " +
     "order by together desc, r.score desc;";
 
-exports.alram_relation_del = "UPDATE alram_relation SET receive_yn = 'y' " +
+exports.alarm_relation_del = "UPDATE alram_relation SET receive_yn = 'y' " +
     "WHERE alram_relation.from = ? and alram_relation.to = ? and receiver = ?";
 
 //선생님 이메일

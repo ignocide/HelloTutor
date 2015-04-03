@@ -268,11 +268,11 @@ exports.follow_list = function(values, callback){
 };
 
 
-exports.alram_relation_del = function(values, callback){
+exports.alarm_relation_del = function(values, callback){
     pool.getConnection(function(err, connection){
         if (err) msg.err_return(err, callback);
         else {
-            connection.query(sql.alram_relation_del, [values.from,values.to,values.logined], function (err,result) {
+            connection.query(sql.alarm_relation_del, [values.from,values.to,values.logined], function (err,result) {
                 connection.release();
                 if (err) msg.err_return(err,callback);
                 else msg.success_return({},callback);
