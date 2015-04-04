@@ -1,8 +1,145 @@
-Welcome to your tutorial repository!
+hello tutor
 ================
-Learn how to use Git and Bitbucket with either SourceTree, one of the best Git clients available, or using Git from the command line. Whichever you choose you will learn how set up Git, clone this repository locally. Then learn how to make and commit a change locally and push that change back to Bitbucket.
+**Libraries**
 
+	jquery, jquery mobile
+	
+**Data Stores**
+
+	redis(session server)
+	mysql
+
+**Languages & Frameworks**
+
+	Angular : view
+	node - express
+	javascript
+
+**Server**
+
+	AWS EC2
+	
 ____
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 ## Start here
 Choose either SourceTree, Atlassian's Git client, or the command line to learn source control using Bitbucket and Git. 
