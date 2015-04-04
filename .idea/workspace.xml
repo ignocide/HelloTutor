@@ -2,42 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f3aaa6dd-12be-4b0e-a103-bd523f03111e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Hello_Tutor_node_modules.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\board\list.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\board\main.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\board\read.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\board\write.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\community\follower_list.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\community\friend_list.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\course\info.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\course\write.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\join\join_email.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\join\login.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\member\recommend_tutor.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\member\recommend_user.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\message\alarm.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\message\list.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\message\notice.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\search\course.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\search\people.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\search\search.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\search\tutor.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\user\tutor_detail.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\user\tutor_simple.ejs" afterPath="" />
-      <change type="DELETED" beforePath="C:\Users\Administrator\Dropbox\Hello_Tutor\views\user\user_simple.ejs" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/Hello_Tutor.iml" afterPath="$PROJECT_DIR$/.idea/Hello_Tutor.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/DB_board.js" afterPath="$PROJECT_DIR$/database/DB_board.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/DB_community.js" afterPath="$PROJECT_DIR$/database/DB_community.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/board.js" afterPath="$PROJECT_DIR$/routes/board.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/community.js" afterPath="$PROJECT_DIR$/routes/community.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/config.js" afterPath="$PROJECT_DIR$/database/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/course.js" afterPath="$PROJECT_DIR$/routes/course.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/member.js" afterPath="$PROJECT_DIR$/routes/member.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/message.js" afterPath="$PROJECT_DIR$/routes/message.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/search.js" afterPath="$PROJECT_DIR$/routes/search.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/database/sqls.js" afterPath="$PROJECT_DIR$/database/sqls.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/routes/users.js" afterPath="$PROJECT_DIR$/routes/users.js" />
     </list>
     <ignored path="Hello_Tutor.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -319,7 +284,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
