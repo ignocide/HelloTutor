@@ -35,3 +35,22 @@ ____
 	비밀번호 수정, 연결하기(기능완성)
 	검색 페이지에서 친구 추가 버튼 없애기(친구 추가는 프로필 이동 후 추가 버튼)
 	프로필 수정(작성) 기능 연결
+
+##etc
+	#서비스 주소
+	54.65.219.91 (아직 안되는게 많습니다.)
+	
+	#폴더별 설명
+	view : ejs파일들, view관련된 파일 들이 있다.
+	view/home.ejs : 서비스 페이지(원페이지 탬플릿 방식)
+	
+	database : database 모듈들
+	database/sql.js : sql문
+	database/msg.js : 에러메세지 처리 모듈
+	
+	public/javascript : 모든 html의 js파일
+	public/javascript/angular-directive.js : angular directive 파일
+	public/javascript/angular-functions.js : 기능 함수들, 주로 ajax통신
+	public/javascript/photo.js : 사진 처리 모듈
+	
+	
