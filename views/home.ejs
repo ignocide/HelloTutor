@@ -279,7 +279,7 @@
 </div>
 
 
-<div id='find_pw' data-role='page' data-title="find_pw">
+<div id='find_pw' data-role='page' data-title="find_pw" ng-controller="loginCtrl">
     <header data-role='header' data-theme='c'>
         <h1><img src="../images/hellotutor2.png" class = "logo_header" alt='logo'/></h1>
         <a href='#home' data-icon='arrow-l' data-iconpos='notext'></a>
@@ -289,10 +289,10 @@
     <section data-role='content'>
         <form name="login_frm" data-ajax="false" action="/member/send_pw" method="POST">
             <label for="basic">이메일</label>
-            <input type="email" name="email" id="email"  value="" placeholder="이메일" />
+            <input type="email" ng-model="fined_email"  value="" placeholder="이메일" />
             <!--<input type="password" name="pw" id="pw" value="1234"  placeholder="비밀번호"/>-->
             <br/><br/><br/><br/><br/>
-            <input id="login_submit" type="submit" value="비밀번호 찾기"/>
+            <button ng-click="find_pw()" value="비밀번호 찾기"/>
             <a href='#login' id="login_cancel" data-role="button">취소</a>
         </form>
     </section>
@@ -924,10 +924,10 @@
                         </div>
                     </div>
                     <div class="ui-block-c" style="width:20%;">
-                        <div id="search_user_inner" style="text-align: center"><!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px; "/>-->
-                            <button class="reqFriendBtn" ng-click="reqFriend(recommend.email)" ng-if="!recommend.isFriend" ng-init="recommend.isFriend=0">친구 추가</button>
-                            <button class="delFriendBtn" ng-click="delFriend(recommend.email)" ng-if="recommend.isFriend">친구 요청중</button>
-                        </div>
+                        <!--<div id="search_user_inner" style="text-align: center">&lt;!&ndash;<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px; "/>&ndash;&gt;-->
+                            <!--<button class="reqFriendBtn" ng-click="reqFriend(recommend.email)" ng-if="!recommend.isFriend" ng-init="recommend.isFriend=0">친구 추가</button>-->
+                            <!--<button class="delFriendBtn" ng-click="delFriend(recommend.email)" ng-if="recommend.isFriend">친구 요청중</button>-->
+                        <!--</div>-->
                     </div>
                 </div>
             </li>
@@ -982,8 +982,8 @@
                     <div class="ui-block-c" style="width:20%;">
                         <div id="search_user_inner" style="text-align: center" ng-init="item.isFriend=0">
                             <!--<img src="/images/mini_friend_gray2.png" id = "isFriend_icon" alt='logo' style="height: 60px;"/>-->
-                            <button class="reqFriendBtn" ng-click="reqFriend(list.indexOf(item))" ng-if="!item.isFriend">친구 추가</button>
-                            <button class="delFriendBtn" ng-click="delFriend(list.indexOf(item))" ng-if="item.isFriend">친구 요청중</button>
+                            <!--<button class="reqFriendBtn" ng-click="reqFriend(list.indexOf(item))" ng-if="!item.isFriend">친구 추가</button>-->
+                            <!--<button class="delFriendBtn" ng-click="delFriend(list.indexOf(item))" ng-if="item.isFriend">친구 요청중</button>-->
                         </div>
                     </div>
                 </div>

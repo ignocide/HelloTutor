@@ -64,8 +64,8 @@ router.post('/recommend_user',function(req,res){
 //비밀번호 재설정 요청(이메일 보내기)
 router.post('/send_pw', function(req, res){
     DB_member.send_pw(req.body,function(data){
-//        res.json(data);
-            res.redirect('/');
+        res.json(data);
+//            res.redirect('/');
     })
 
 });

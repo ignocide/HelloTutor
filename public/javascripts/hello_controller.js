@@ -373,6 +373,14 @@ app.controller('loginCtrl', function($scope,common,functions) {
 	$scope.email = 'heesuk@naver.com';
 	$scope.pw = 'academy1';
 
+	$scope.find_pw = function(){
+			functions.find_pw($scope.find_email,function(data){
+				if(data.isSuccess == 1){
+					alert("이메일을 확인하세요.");
+					$.mobile.changePage("home");
+				}
+			});
+	}
 	$scope.doLogin = function(){
 		functions.doLogin($scope.email,$scope.pw,function(data){
 		if(data.isSuccess == 1){

@@ -670,5 +670,21 @@ app.service('functions', function($http){
 			$.mobile.changePage('#home');
 		});
     }
+
+    this.find_pw = function(email,callback){
+    	var url = ip='/member/send_pw'
+
+		var input = {};
+		input.email = email;
+		$http.post(url, input).
+			success(function(data, status, headers, config) {
+				console.log(data);
+				callback(data);
+			}).
+			error(function(data, status, headers, config) {
+				alert("server error");
+				$.mobile.changePage('#home');
+			});
+    }
 });
 
